@@ -64,7 +64,7 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 # copying, publication or disclosure prohibited.
 # 
-# 14 lines, O(N*M). =/
+# 14 lines, O(N*M). 62% =/
 def solution(S, P, Q):
 	S_temp = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
 	expected_array = [None] * len(P)
