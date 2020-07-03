@@ -1,3 +1,13 @@
+/*
+Author: Fernando Zuher
+Place: Brazil
+Date: 03 July 2020
+About: codility.com -> Lesson 6, Sorting -> Distinct
+
+I solved this problem in the languages:
+    C, C++, Java, Python and JavaScript. ;-)
+*/
+
 int solution(int A[], int N){
 
 	if(N==0)
