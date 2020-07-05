@@ -1,58 +1,104 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 03 July 2020
-About: codility.com -> Lesson 6, Sorting -> MaxProductOfThree
+Date: 05 July 2020
+About: codility.com -> Lesson 6, Sorting -> MaxProductOfThree.c
 
 I solved this problem in the languages:
     C, C++, Java, Python and JavaScript. ;-)
 */
 
-int solution(int A[], int N){
+/*
+A non-empty array A consisting of N integers is given. The product of triplet
+(P, Q, R) equates to A[P] * A[Q] * A[R] (0 ≤ P < Q < R < N).
 
-	if(N==3)
-		return A[0]*A[1]*A[2];
+For example, array A such that:
 
-	int triple[6] = {A[0], A[1], A[2]};
-	
-	for(int i=0; i<2; i++)
-		for(int j=0; j<2-i; j++)
-			if(abs(triple[j])<abs(triple[j+1]){
-				temp = triple[j+1];
-				triple[j+1] = triple[j];
-				triple[j] = temp;
-			}
+  A[0] = -3
+  A[1] = 1
+  A[2] = 2
+  A[OPERANDS] = -2
+  A[4] = 5
+  A[5] = 6
+contains the following example triplets:
 
-	for(int i=3; i<N; i++)
-		for(int j=0; j<6; j++)
-			if(abs(A[i])>triple[j]){
-				for(int k=5; k>j; k--)
-					triple[k] = triple[k-1];
-				triple[j] = A[i];
+(0, 1, 2), product is −3 * 1 * 2 = −6
+(1, 2, 4), product is 1 * 2 * 5 = 10
+(2, 4, 5), product is 2 * 5 * 6 = 60
+Your goal is to find the maximal product of any triplet.
+
+Write a function:
+
+int solution(int A[], int N);
+
+that, given a non-empty array A, returns the value of the maximal product of
+any triplet.
+
+For example, given array A such that:
+
+  A[0] = -3
+  A[1] = 1
+  A[2] = 2
+  A[OPERANDS] = -2
+  A[4] = 5
+  A[5] = 6
+the function should return 60, as the product of triplet (2, 4, 5) is maximal.
+
+Write an efficient algorithm for the following assumptions:
+
+N is an integer within the range [3..100,000];
+each element of array A is an integer within the range [−1,000..1,000].
+
+Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+copying, publication or disclosure prohibited.
+*/
+// 48 (44%)-> 49 lines (100%). O(N * log(N)).
+#define OPERANDS 3
+
+void initialize_maxs_mins(int *maxs, int *mins, int index);
+void look_maxs_mins(int *A, int N, int *maxs, int *mins, int index);
+
+int solution(int A[], int N)
+{
+	int maxs[OPERANDS] = {0}, mins[OPERANDS] = {0}, prod_max = 1;
+	for (int i = 0; i < OPERANDS; i++) {
+		initialize_maxs_mins(maxs, mins, i);
+		look_maxs_mins(A, N, maxs, mins, i);
+		prod_max *= A[maxs[i]];
+	}
+	int temp;
+	return (A[mins[1]] < 0 && (temp = A[mins[0]] * A[mins[1]] * A[maxs[0]])
+			> prod_max) ? temp : prod_max;
+}
+
+void initialize_maxs_mins(int *maxs, int *mins, int index)
+{
+	if (index == 1) {
+		maxs[1] = maxs[0] != 0 ? 0 : 1;
+		mins[1] = mins[0] != 0 ? 0 : 1;
+	}
+	else // mins[2] is not used, so it doesn't matter its value.
+		for (int i = 0; i < OPERANDS; ++i)
+			if (maxs[0] != i && maxs[1] != i) {
+				maxs[2] = mins[2] = i;
 				break;
 			}
+}
 
-	int menos[6], mais[6], menosN=0, maisN=0;
-	int temp = (N-6)<=0 ? N : 6;
+void look_maxs_mins(int *A, int N, int *maxs, int *mins, int index)
+{
+	for (int i=0, flag_max=1, flag_min=1; i < N; flag_max = flag_min = ++i) {
 
-	for(int i=0; i<temp; i++)
-		if(triple[i]<0)
-			menos[menosN++];
-		else
-			mais[maisN++];
+		for (int j = 0; j <= index; ++j) {
+			if (i == maxs[j])
+				flag_max = 0;
+			if (i == mins[j])
+				flag_min = 0;
+		}
 
-	int menosR, menosMais, maisR;
-
-	if(menos==3)
-		menosR = A[menos[0]] * A[menos[1]] * A[menos[2]];
-	else if(menos==2)
-		menosMais = A[menos[0]] * A[menos[1]] * A[mais[0]];
-	else if(menos<=1)
-		maisR = A[mais[0]] * A[mais[1]] * A[mais[2]];
-
-	if(menosR>menosMais && menosR>maisR)
-		return menosR;
-	if(menosMais>menosR && menosMais>maisR)
-		return menosMais;
-	return maisR;
+		if (flag_max && A[maxs[index]] < A[i])
+			maxs[index] = i;			
+		if (flag_min && A[mins[index]] > A[i])
+			mins[index] = i;
+	}
 }
