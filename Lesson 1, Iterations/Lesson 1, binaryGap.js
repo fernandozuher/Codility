@@ -5,7 +5,7 @@ Date: 9 July 2020
 About: codility.com -> Lesson 1, Iterations -> BinaryGap
 
 I solved this problem in the languages:
-	C, C++, Java, Python and JavaScript. ;-)
+    C, C++, Java, Python and JavaScript. ;-)
 */
 
 /*
@@ -21,7 +21,7 @@ representation 100000 and has no binary gaps.
 
 Write a function:
 
-int solution(int N);
+function solution(N);
 
 that, given a positive integer N, returns the length of its longest binary gap.
 The function should return 0 if N doesn't contain a binary gap.
@@ -36,18 +36,12 @@ Write an efficient algorithm for the following assumptions:
 N is an integer within the range [1..2,147,483,647].
 
 */
-
-// 13 lines
-int solution(int N)
-{
-    int max_gap = 0;
-    for (int i = 0, first = -1, second = 0, temp_max = 0; N >= 2; N /= 2) {
-        for (; N >= 2 && !(N % 2); N /= 2, i++); // decimal -> bit 1
-        second = first == -1 ? first = i++ : i++;
-                
-        if (second != first && (temp_max = second - first - 1) > max_gap)
-            max_gap = temp_max;
-        first = second;
-    }
-    return max_gap;
+// 8 lines
+function solution(N) {
+    for (
+          let bin = N.toString(2), i = j = max_gap = 0 ;
+          (i = bin.indexOf('1', j)) >= 0 && (j = bin.indexOf('1', i+1)) > 0 ;
+          max_gap = Math.max(j - i - 1, max_gap)
+        );
+    return max_gap
 }
