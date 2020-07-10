@@ -1,11 +1,12 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 9 July 2020
+Date: 10 July 2020
 About: codility.com -> Lesson 1, Iterations -> BinaryGap
 
-I solved this problem in the languages:
-	C, C++, Java, Python and JavaScript. ;-)
+I solved this problem in the languages: C (13 lines), C++ (13 lines),
+Java (9 lines), Python (9 lines) and JavaScript (8 lines). ;-)
+
 */
 
 /*
@@ -35,8 +36,10 @@ Write an efficient algorithm for the following assumptions:
 
 N is an integer within the range [1..2,147,483,647].
 
-*/
+Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+copying, publication or disclosure prohibited.
 
+*/
 // 13 lines
 int solution(int N)
 {

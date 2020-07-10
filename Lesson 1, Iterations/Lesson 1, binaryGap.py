@@ -1,12 +1,12 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 9 July 2020
+# Date: 10 July 2020
 # About: codility.com -> Lesson 1, Iterations -> BinaryGap
 #
-# I solved this problem in the languages:
-#	C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (13 lines), C++ (13 lines),
+# Java (9 lines), Python (9 lines) and JavaScript (8 lines). ;-)
 #
-########################################################################
+##############################################################################
 #
 # A binary gap within a positive integer N is any maximal sequence of
 # consecutive zeros that is surrounded by ones at both ends in the binary
@@ -38,13 +38,16 @@
 # you can write to stdout for debugging purposes, e.g.
 # print("this is a debug message")
 #
+# Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+# copying, publication or disclosure prohibited.
+#
 # 9 lines
 def solution(N):
-    j = max_gap = 0; binary = '{0:b}'.format(N)
+    BINARY = '{0:b}'.format(N); j = max_gap = 0
     while True:
         try:
-            i = binary.index('1', j)
-            j = binary.index('1', i+1)
+            i = BINARY.index('1', j)
+            j = BINARY.index('1', i+1)
         except ValueError: break
         else: max_gap = max(j - i - 1, max_gap)
     return max_gap
