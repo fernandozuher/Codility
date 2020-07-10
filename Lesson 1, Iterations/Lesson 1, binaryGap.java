@@ -21,7 +21,7 @@ representation 100000 and has no binary gaps.
 
 Write a function:
 
-int solution(int N);
+class Solution { public int solution(int N); }
 
 that, given a positive integer N, returns the length of its longest binary gap.
 The function should return 0 if N doesn't contain a binary gap.
@@ -36,35 +36,13 @@ Write an efficient algorithm for the following assumptions:
 N is an integer within the range [1..2,147,483,647].
 
 */
-// 13 lines
-#include <bitset> // bitset
-#include <string> // string
-#include <algorithm> // max
-
-int solution(int N)
-{
-    std::string binary = std::bitset<sizeof(int) * 8>(N).to_string();
-    std::size_t i {}, j {}, max_gap {};
-    while ((i = {binary.find('1', j)}) != std::string::npos &&
-           (j = {binary.find('1', i+1)}) != std::string::npos)
-               max_gap = {std::max(j - i - 1, max_gap)};
-    return max_gap;
+// 9 lines
+class Solution {
+    public int solution(int N) {
+        String binary = Integer.toBinaryString(N);
+        int i = 0, j = 0, max_gap = 0;
+        while ((i = binary.indexOf('1', j)) >= 0 && (j = binary.indexOf('1', i+1)) > 0)
+            max_gap = Math.max(j - i - 1, max_gap);
+        return max_gap;
+    }
 }
-
-
-/* C++17
-#include <bitset> // bitset
-#include <tuple> // tupple
-#include <algorithm> // find, max
-using namespace std;
-
-int solution(int N)
-{
-    for (
-      auto [binary, i, j, max_gap] = tuple{bitset<sizeof(int)*8>(N).to_string(), 0, 0, 0} ;
-      (i = {find(binary, j)} != string::npos && (j = {find(binary, i+1)} != string::npos ;
-      max_gap = {max(j - i - 1, max_gap)}
-    );
-    return max_gap;
-}
-*/
