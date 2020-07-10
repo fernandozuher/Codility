@@ -5,7 +5,7 @@ Date: 9 July 2020
 About: codility.com -> Lesson 1, Iterations -> BinaryGap
 
 I solved this problem in the languages:
-	C, C++, Java, Python and JavaScript. ;-)
+    C, C++, Java, Python and JavaScript. ;-)
 */
 
 /*
@@ -38,16 +38,34 @@ N is an integer within the range [1..2,147,483,647].
 */
 
 // 13 lines
+#include <bitset> // bitset
+#include <string> // string
+#include <algorithm> // max
+
 int solution(int N)
 {
-    int max_gap = 0;
-    for (int x = 0, i = -1, j = 0, temp_max = 0; N >= 2; N /= 2) {
-        for (; N >= 2 && !(N % 2); N /= 2, x++); // decimal -> bit
-        j = i == -1 ? i = x++ : x++;
-                
-        if (j != i && (temp_max = j - i - 1) > max_gap)
-            max_gap = temp_max;
-        i = j;
-    }
+    std::string binary = std::bitset<sizeof(int) * 8>(N).to_string();
+    std::size_t i {}, j {}, max_gap {};
+    while ((i = {binary.find('1', j)}) != std::string::npos &&
+           (j = {binary.find('1', i+1)}) != std::string::npos)
+               max_gap = {std::max(j - i - 1, max_gap)};
     return max_gap;
 }
+
+
+/* C++17
+#include <bitset> // bitset
+#include <tuple> // tupple
+#include <algorithm> // find, max
+using namespace std;
+
+int solution(int N)
+{
+    for (
+      auto [binary, i, j, max_gap] = tuple{bitset<sizeof(int)*8>(N).to_string(), 0, 0, 0} ;
+      (i = {find(binary, j)} != string::npos && (j = {find(binary, i+1)} != string::npos ;
+      max_gap = {max(j - i - 1, max_gap)}
+    );
+    return max_gap;
+}
+*/

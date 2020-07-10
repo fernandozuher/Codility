@@ -36,12 +36,11 @@ Write an efficient algorithm for the following assumptions:
 N is an integer within the range [1..2,147,483,647].
 
 */
-// 8 lines
-function solution(N) {
-    for (
-          let bin = N.toString(2), i = j = max_gap = 0 ;
-          (i = bin.indexOf('1', j)) >= 0 && (j = bin.indexOf('1', i+1)) > 0 ;
-          max_gap = Math.max(j - i - 1, max_gap)
-        );
+// 7 lines
+function solution(N)
+{
+    const bin = (N >>> 0).toString(2); let i = j = max_gap = 0
+    while ((i = bin.indexOf('1', j)) >= 0 && (j = bin.indexOf('1', i+1)) > 0)
+        max_gap = Math.max(j - i - 1, max_gap)
     return max_gap
 }

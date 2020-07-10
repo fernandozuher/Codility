@@ -40,11 +40,11 @@
 #
 # 9 lines
 def solution(N):
-    index_second = max_gap = 0; binary = '{0:b}'.format(N)
+    j = max_gap = 0; binary = '{0:b}'.format(N)
     while True:
         try:
-            index_first = binary.index('1', index_second)
-            index_second = binary.index('1', index_first+1)
+            i = binary.index('1', j)
+            j = binary.index('1', i+1)
         except ValueError: break
-        else: max_gap = max(index_second - index_first - 1, max_gap)
+        else: max_gap = max(j - i - 1, max_gap)
     return max_gap
