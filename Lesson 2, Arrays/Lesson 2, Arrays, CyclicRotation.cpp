@@ -6,7 +6,6 @@ About: codility.com -> Lesson 2, Arrays -> CyclicRotation
 
 I solved this problem in the languages: C (11 lines), C++ (11 lines),
 Java (12 lines), Python (5 lines) and JavaScript (5 lines).
-
 */
 
 /*
@@ -19,16 +18,9 @@ index and 6 is moved to the first place).
 The goal is to rotate array A K times; that is, each element of A will be
 shifted to the right K times.
 
-Assume that the following declarations are given:
-
-struct Results {
-  int * A;
-  int N; // Length of the array
-};
-
 Write a function:
 
-struct Results solution(int A[], int N, int K);
+vector<int> solution(vector<int> &A, int K);
 
 that, given an array A consisting of N integers and an integer K, returns the
 array A rotated K times.
@@ -61,17 +53,20 @@ each element of array A is an integer within the range [−1,000..1,000].
 In your solution, focus on correctness. The performance of your solution will
 not be the focus of the assessment.
 
+Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+copying, publication or disclosure prohibited.
+
 */
 
 // 11 lines
-#include <string.h>
-struct Results solution(int A[], int N, int K)
+vector<int> solution(vector<int> &A, int K)
 {
+    const int N = A.size();
     if (N > 1 && (K = K >= N ? K % N : K)) {
-        int *temp = (int*) malloc(sizeof(int) * N);
-        memcpy(temp, &A[N-K], K * sizeof(*A));
-        memcpy(temp + K, A, (N-K) * sizeof(*A));
-        return (struct Results) {temp, N};
+        std::vector<int> v1 {A.begin() + N-K, A.end()};
+        std::vector<int> v2 {A.begin(), A.begin() + N-K};
+        v1.insert(v1.end(), v2.begin(), v2.end());
+        return v1;
     }
-    return (struct Results) {A, N};
+    return A;
 }
