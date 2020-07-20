@@ -26,7 +26,7 @@ the elements at indexes 4 and 6 have value 9,
 the element at index 5 has value 7 and is unpaired.
 Write a function:
 
-int solution(int A[], int N);
+class Solution { public int solution(int[] A); }
 
 that, given an array A consisting of N integers fulfilling the above
 conditions, returns the value of the unpaired element.
@@ -49,25 +49,23 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 24 lines -> 21 lines. O(N) or O(N*log(N))
-int compare (const void *a, const void *b);
+// 19 lines. O(N) or O(N*log(N))
+import java.util.Arrays;
+class Solution {
+    public int solution(int[] A) {
+        Arrays.sort(A);
+        int temp = A[0];
+        boolean flag = true;
 
-int solution(int A[], int N)
-{
-    qsort(A, N, sizeof(int), compare);
-
-    int temp = A[0];
-    for (int i = 1, flag = 1; i < N; i++)
-        if (A[i] == temp)
-            flag = !flag;
-        else if (!flag)
-            flag = 1, temp = A[i];
-        else
-            break;
-    return temp;
-}
-
-int compare (const void *a, const void *b)
-{
-    return ( *(int*)a - *(int*)b );
+        for (int i = 1, N = A.length; i < N; i++)
+            if (A[i] == temp)
+                flag = !flag;
+            else if (!flag) {
+                flag = true;
+                temp = A[i];
+            }
+            else
+                break;
+        return temp;
+    }
 }

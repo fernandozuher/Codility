@@ -26,7 +26,7 @@ the elements at indexes 4 and 6 have value 9,
 the element at index 5 has value 7 and is unpaired.
 Write a function:
 
-int solution(int A[], int N);
+int solution(vector<int> &A);
 
 that, given an array A consisting of N integers fulfilling the above
 conditions, returns the value of the unpaired element.
@@ -49,25 +49,23 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 24 lines -> 21 lines. O(N) or O(N*log(N))
-int compare (const void *a, const void *b);
-
-int solution(int A[], int N)
+// 16 lines. O(N) or O(N*log(N))
+#include  <algorithm>
+int solution(vector<int> &A)
 {
-    qsort(A, N, sizeof(int), compare);
+    sort(A.begin(), A.end());
+    auto temp {A[0]};
+    auto flag {true};
 
-    int temp = A[0];
-    for (int i = 1, flag = 1; i < N; i++)
+    for (auto i {1ul}, N {A.size()}; i < N; i++)
         if (A[i] == temp)
             flag = !flag;
         else if (!flag)
-            flag = 1, temp = A[i];
+            flag = {true}, temp = {A[i]};
         else
             break;
     return temp;
 }
 
-int compare (const void *a, const void *b)
-{
-    return ( *(int*)a - *(int*)b );
-}
+// In C++17
+//for (auto [i, N, temp, flag] = tuple{1, A.size(), A[0], true}; i < N; i++)

@@ -1,12 +1,13 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 18 July 2020
+# Date: 20 July 2020
 # About: Lesson 2, Arrays -> OddOccurrencesInArray
-
-# I solved this problem in the languages:
-    # C, C++, Java, Python and JavaScript. ;-)
-################################################################################
-
+#
+# I solved this problem in the languages: C (21 lines), C++ (16 lines),
+# Java (19 lines), Python (11 lines) and JavaScript (12 lines). ;-)
+#
+##############################################################################
+#
 # A non-empty array A consisting of N integers is given. The array contains an
 # odd number of elements, and each element of the array can be paired with
 # another element that has the same value, except for one element that is left
@@ -47,12 +48,12 @@
 # 13 lines -> 11 lines. O(N) or O(N*log(N))
 def solution(A):
     A.sort()
-    temp, N, flag = A[0], len(A), True
+    N, temp, flag = len(A), A[0], True
     for i in range(1, N):
         if A[i] == temp:
             flag = not flag
         elif not flag:
-            temp, flag = A[i], True
+            flag, temp = True, A[i]
         else:
             break
     return temp
