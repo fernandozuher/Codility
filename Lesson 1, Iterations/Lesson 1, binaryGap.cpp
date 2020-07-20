@@ -1,7 +1,7 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 10 July 2020
+Last edition: 20 July 2020
 About: codility.com -> Lesson 1, Iterations -> BinaryGap
 
 I solved this problem in the languages: C (13 lines), C++ (13 lines),
@@ -47,14 +47,13 @@ copying, publication or disclosure prohibited.
 
 int solution(int N)
 {
-    std::string const BINARY = std::bitset<sizeof(int) * 8>(N).to_string();
+    std::string const BINARY {std::bitset<sizeof(int) * 8>(N).to_string()};
     std::size_t i {}, j {}, max_gap {};
     while ((i = {BINARY.find('1', j)}) != std::string::npos &&
            (j = {BINARY.find('1', i+1)}) != std::string::npos)
                max_gap = {std::max(j - i - 1, max_gap)};
     return max_gap;
 }
-
 
 /* C++17
 #include <bitset> // bitset
