@@ -47,8 +47,8 @@ copying, publication or disclosure prohibited.
 */
 
 // 5 lines. O(1)
-#include <math.h>
+#include <cmath>
 int solution(int X, int Y, int D)
 {
-	return ceil((double)(Y - X) / D);
+	return std::ceil((double)(Y - X) / D);
 }

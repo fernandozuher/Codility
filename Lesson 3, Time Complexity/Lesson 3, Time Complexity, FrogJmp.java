@@ -21,7 +21,7 @@ target.
 
 Write a function:
 
-int solution(int X, int Y, int D);
+class Solution { public int solution(int X, int Y, int D); }
 
 that, given three integers X, Y and D, returns the minimal number of jumps from
 position X to a position equal to or greater than Y.
@@ -46,9 +46,10 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 5 lines. O(1)
-#include <math.h>
-int solution(int X, int Y, int D)
-{
-	return ceil((double)(Y - X) / D);
+// 6 lines. O(1)
+import java.lang.Math;
+class Solution {
+	public int solution(int X, int Y, int D) {
+		return (int) Math.ceil((double)(Y - X) / D);
+	}
 }

@@ -21,7 +21,7 @@ target.
 
 Write a function:
 
-int solution(int X, int Y, int D);
+function solution(X, Y, D);
 
 that, given three integers X, Y and D, returns the minimal number of jumps from
 position X to a position equal to or greater than Y.
@@ -46,9 +46,7 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 5 lines. O(1)
-#include <math.h>
-int solution(int X, int Y, int D)
-{
-	return ceil((double)(Y - X) / D);
+// 3 lines. O(1)
+function solution(X, Y, D) {
+	return Math.ceil((Y - X) / D)
 }

@@ -1,12 +1,15 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 21 May 2020
+# Date: 20 July 2020
 # About: codility.com -> Lesson 3, Time Complexity -> FrogJmp
-
-# I solved this problem in the languages:
-#    C, C++, Java, Python and JavaScript. ;-)
+#
+# I solved this problem in the languages: C (5 lines), C++ (5 lines),
+# Java (6 lines), Python (3 lines) and JavaScript (3 lines). ;-)
+#
 ################################################################################
-
+# Source:
+# https://app.codility.com/programmers/lessons/3-time_complexity/frog_jmp/
+#
 # A small frog wants to get to the other side of the road. The frog is
 # currently located at position X and wants to get to a position greater than
 # or equal to Y. The small frog always jumps a fixed distance, D.
@@ -35,8 +38,11 @@
 # 
 # X, Y and D are integers within the range [1..1,000,000,000];
 # X ≤ Y.
-
-# 3 lines
+#
+# Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+# copying, publication or disclosure prohibited.
+#
+# 3 lines. O(1)
 import math
 def solution(X, Y, D):
 	return math.ceil((Y - X) / D)
