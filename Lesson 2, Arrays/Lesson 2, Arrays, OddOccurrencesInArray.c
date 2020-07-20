@@ -1,7 +1,7 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 20 May 2020
+Date: 18 July 2020
 About: codility.com -> Lesson 2, Arrays -> OddOccurrencesInArray
 
 I solved this problem in the languages:
@@ -9,7 +9,10 @@ I solved this problem in the languages:
 */
 
 /*
-A non-empty array A consisting of N integers is given. The array contains an odd number of elements, and each element of the array can be paired with another element that has the same value, except for one element that is left unpaired.
+A non-empty array A consisting of N integers is given. The array contains an
+odd number of elements, and each element of the array can be paired with
+another element that has the same value, except for one element that is left
+unpaired.
 
 For example, in array A such that:
 
@@ -24,7 +27,8 @@ Write a function:
 
 int solution(int A[], int N);
 
-that, given an array A consisting of N integers fulfilling the above conditions, returns the value of the unpaired element.
+that, given an array A consisting of N integers fulfilling the above
+conditions, returns the value of the unpaired element.
 
 For example, given array A such that:
 
@@ -38,25 +42,27 @@ Write an efficient algorithm for the following assumptions:
 N is an odd integer within the range [1..1,000,000];
 each element of array A is an integer within the range [1..1,000,000,000];
 all but one of the values in A occur an even number of times.
+
+Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+copying, publication or disclosure prohibited.
+
 */
 
+// 24 lines -> 21 lines. O(N) or O(N*log(N))
 int compare (const void *a, const void *b);
 
 int solution(int A[], int N)
 {
     qsort(A, N, sizeof(int), compare);
-
-    int temp = 0, flag = 1;
-    for (int i = 0; i < N; i++)
-        if (!temp)
-            temp = A[i];
-        else if (A[i] == temp)
+    
+    int temp = A[0];
+    for (int i = 1, flag = 1; i < N; i++)
+        if (A[i] == temp)
             flag = !flag;
-        else if (flag)
-            break;
+        else  if (!flag)
+            flag = temp = A[i];
         else
-            flag = temp = A[i]; // flag = temp = A[i] is the same as flag = 1;
-
+            break;
     return temp;
 }
 

@@ -1,6 +1,6 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 20 May 2020
+# Date: 18 July 2020
 # About: Lesson 2, Arrays -> OddOccurrencesInArray
 
 # I solved this problem in the languages:
@@ -40,19 +40,19 @@
 # N is an odd integer within the range [1..1,000,000];
 # each element of array A is an integer within the range [1..1,000,000,000];
 # all but one of the values in A occur an even number of times.
-
-# Detected time complexity: O(N) or O(N*log(N))
-# 13 lines
+#
+# Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+# copying, publication or disclosure prohibited.
+#
+# 13 lines -> 11 lines. O(N) or O(N*log(N))
 def solution(A):
-    temp = 0; flag = True
-    for value in sorted(A):
-        if not temp: 
-            temp = value
-        elif value == temp:
+    A.sort()
+    temp, N, flag = A[0], len(A), True
+    for i in range(1, N):
+        if A[i] == temp:
             flag = not flag
-        elif flag:
-            break
+        elif not flag:
+            temp, flag = A[i], True
         else:
-            temp = value
-            flag = True
+            break
     return temp
