@@ -4,8 +4,8 @@ Place: Brazil
 Date: 20 July 2020
 About: codility.com -> Lesson 3, Time Complexity -> PermMissingElem
 
-I solved this problem in the languages: C (6 lines), C++ (6 lines),
-Java (7 lines), Python (3 lines) and JavaScript (4 lines). ;-)
+I solved this problem in the languages:
+    C, C++, Java, Python and JavaScript. ;-)
 */
 
 /*
@@ -20,7 +20,7 @@ Your goal is to find that missing element.
 
 Write a function:
 
-int solution(int A[], int N);
+function solution(A);
 
 that, given an array A, returns the value of the missing element.
 
@@ -43,10 +43,8 @@ Unauthorized copying, publication or disclosure prohibited.
 
 */
 
-// 6 lines. O(N)
-int solution(int A[], int N)
-{                              // (N*N + 3*N + 2) / 2 = 1 + 2 + ... + N + N+1
-    unsigned sum_elements = 0, expected_sum = (unsigned) (N*N + 3*N + 2) / 2;
-    for (int i = 0; i < N; sum_elements += A[i++]);
-    return expected_sum - sum_elements;
+// 4 lines. O(N) or O(N * log(N))
+function solution(A) { // (N*N + 3*N + 2) / 2 = 1 + 2 + ... + N + N+1
+    let N = A.length, expected_sum = (N*N + 3*N + 2) / 2
+    return expected_sum - A.reduce((a, b) => a + b, 0)
 }

@@ -20,7 +20,7 @@ Your goal is to find that missing element.
 
 Write a function:
 
-int solution(int A[], int N);
+int solution(vector<int> &A);
 
 that, given an array A, returns the value of the missing element.
 
@@ -43,10 +43,10 @@ Unauthorized copying, publication or disclosure prohibited.
 
 */
 
-// 6 lines. O(N)
-int solution(int A[], int N)
-{                              // (N*N + 3*N + 2) / 2 = 1 + 2 + ... + N + N+1
-    unsigned sum_elements = 0, expected_sum = (unsigned) (N*N + 3*N + 2) / 2;
-    for (int i = 0; i < N; sum_elements += A[i++]);
-    return expected_sum - sum_elements;
+// 6 lines. O(N) or O(N * log(N))
+#include <numeric>
+int solution(vector<int> &A)
+{   // (N*N + 3*N + 2) / 2 = 1 + 2 + ... + N + N+1
+    auto N {A.size()}, expected_sum {(N*N + 3*N + 2) / 2};
+    return expected_sum - std::accumulate(A.begin(), A.end(), 0);
 }

@@ -1,11 +1,14 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 21 May 2020
+# Date: 20 July 2020
 # About: codility.com -> Lesson 3, Time Complexity -> PermMissingElem
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (6 lines), C++ (6 lines),
+# Java (7 lines), Python (3 lines) and JavaScript (4 lines). ;-)
+#
 ################################################################################
+# Source:
+# https://app.codility.com/programmers/lessons/3-time_complexity/perm_missing_elem/
 # 
 # An array A consisting of N different integers is given. The array contains
 # integers in the range [1..(N + 1)], which means that exactly one element is
@@ -32,10 +35,11 @@
 # N is an integer within the range [0..100,000];
 # the elements of A are all distinct;
 # each element of array A is an integer within the range [1..(N + 1)].
-
-# 5 lines
-def solution(A):
-    # (N*N + 3*N + 2) / 2 = 1 + 2 + ... + N + N+1
-    N = len(A)
-    total_sum = (N*N + 3*N + 2) / 2
-    return int(total_sum - sum(A))
+#
+# Copyright 2009–2020 by Codility Limited. All Rights Reserved.
+# Unauthorized copying, publication or disclosure prohibited.
+#
+# 3 lines
+def solution(A): # (N*N + 3*N + 2) / 2 = 1 + 2 + ... + N + N+1
+    N = len(A); expected_sum = (N*N + 3*N + 2) / 2
+    return int(expected_sum - sum(A))
