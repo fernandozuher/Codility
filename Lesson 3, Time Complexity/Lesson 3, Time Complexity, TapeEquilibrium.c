@@ -4,8 +4,9 @@ Place: Brazil
 Date: 20 July 2020
 About: codility.com -> Lesson 3, Time Complexity -> TapeEquilibrium
 
-I solved this problem in the languages:
-    C, C++, Java, Python and JavaScript. ;-)
+I solved this problem in the languages: C (14 lines), C++ (15 lines),
+Java (15 lines), Python (9 lines) and JavaScript (11 lines). ;-)
+
 */
 
 /*

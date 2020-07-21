@@ -3,8 +3,8 @@
 # Date: 20 July 2020
 # About: codility.com -> Lesson 3, Time Complexity -> TapeEquilibrium
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (14 lines), C++ (15 lines),
+# Java (15 lines), Python (9 lines) and JavaScript (11 lines). ;-)
 # 
 ################################################################################ 
 # Source:
@@ -59,15 +59,14 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved.
 # Unauthorized copying, publication or disclosure prohibited.
 #
-# 11 lines. O(N)
+# 10 lines. O(N)
 def solution(A):
-    first_part, remaining = A[0], sum(A)-A[0]
-    min = abs(A[0] - remaining)
+    remaining = sum(A) - A[0]
+    min_v = abs(A[0] - remaining)
+    first_part = A[0]
 
     for i in range(1, len(A)):
-        temp = abs(first_part - remaining)
-        if min > temp: 
-            min = temp
+        min_v = min(min_v, abs(first_part - remaining))
         first_part += A[i]; remaining -= A[i]
 
-    return min
+    return min_v

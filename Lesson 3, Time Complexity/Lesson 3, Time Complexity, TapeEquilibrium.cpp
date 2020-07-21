@@ -4,8 +4,9 @@ Place: Brazil
 Date: 20 July 2020
 About: codility.com -> Lesson 3, Time Complexity -> TapeEquilibrium
 
-I solved this problem in the languages:
-    C, C++, Java, Python and JavaScript. ;-)
+I solved this problem in the languages: C (14 lines), C++ (15 lines),
+Java (15 lines), Python (9 lines) and JavaScript (11 lines). ;-)
+
 */
 
 /*
@@ -66,15 +67,15 @@ copying, publication or disclosure prohibited.
 // 15 lines. O(N)
 #include <numeric> // std::accumulate()
 #include <cstdlib> // abs()
+#include <algorithm> // min()
 int solution(vector<int> &A)
 {
     auto remaining {std::accumulate(A.begin()+1, A.end(), 0)};
     auto min {(abs(A[0] - remaining))};
-    auto N {static_cast<int> (A.size())};
+    const int N {static_cast<int> (A.size())};
 
-    for (auto i {1}, first_part {A[0]}, temp {0}; i < N; i++) {
-        if (min > (temp = {abs(first_part - remaining)}))
-            min = {temp};
+    for (auto i {1}, first_part {A[0]}; i < N; i++) {
+        min = std::min(min, abs(first_part - remaining));
         first_part += A[i], remaining -= A[i];
     }
     return min;
