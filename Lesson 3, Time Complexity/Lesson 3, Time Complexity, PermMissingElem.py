@@ -39,7 +39,7 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved.
 # Unauthorized copying, publication or disclosure prohibited.
 #
-# 3 lines
+# 3 lines. O(N) or O(N * log(N))
 def solution(A): # (N*N + 3*N + 2) / 2 = 1 + 2 + ... + N + N+1
     N = len(A); expected_sum = (N*N + 3*N + 2) / 2
     return int(expected_sum - sum(A))

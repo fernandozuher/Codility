@@ -39,7 +39,7 @@ P = 3, difference = |6 − 7| = 1
 P = 4, difference = |10 − 3| = 7
 Write a function:
 
-int solution(int A[], int N);
+class Solution { public int solution(int[] A); }
 
 that, given a non-empty array A of N integers, returns the minimal difference
 that can be achieved.
@@ -63,18 +63,20 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 14 lines. O(N)
-#include <stdlib.h> // abs()
-int solution(int A[], int N)
-{
-    int remaining = 0;
-    for (int i = 1; i < N; remaining += A[i++]);
+// 15 lines. O(N)
+import java.lang.Math;
+import java.util.Arrays;
+class Solution {
+    public int solution(int[] A) {
+        int remaining = Arrays.stream(A).sum() - A[0];
+        int min = Math.abs(A[0] - remaining);
+        final int N = A.length;
 
-    unsigned min = abs(A[0] - remaining);
-    for (int i = 1, first_part = A[0], temp; i < N; i++) {
-        if (min > (temp = abs(first_part - remaining)))
-            min = temp;
-        first_part += A[i], remaining -= A[i];
+        for (int i = 1, first_part = A[0], temp; i < N; i++) {
+            if (min > (temp = Math.abs(first_part - remaining)))
+                min = temp;
+            first_part += A[i]; remaining -= A[i];
+        }
+        return min;
     }
-    return min;
 }

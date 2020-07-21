@@ -1,12 +1,15 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 21 May 2020
+# Date: 20 July 2020
 # About: codility.com -> Lesson 3, Time Complexity -> TapeEquilibrium
 # 
 # I solved this problem in the languages:
 #     C, C++, Java, Python and JavaScript. ;-)
-################################################################################ 
 # 
+################################################################################ 
+# Source:
+# https://app.codility.com/programmers/lessons/3-time_complexity/tape_equilibrium/
+#
 # A non-empty array A consisting of N integers is given. Array A represents
 # numbers on a tape.
 # 
@@ -52,15 +55,19 @@
 # 
 # N is an integer within the range [2..100,000];
 # each element of array A is an integer within the range [−1,000..1,000].
-
-# 10 lines
+#
+# Copyright 2009–2020 by Codility Limited. All Rights Reserved.
+# Unauthorized copying, publication or disclosure prohibited.
+#
+# 11 lines. O(N)
 def solution(A):
-    
-    first_part = 0; sum_total = sum(A); min = abs(A[0] - (sum_total - A[0]))
-    for i in range(len(A) - 1):
+    first_part, remaining = A[0], sum(A)-A[0]
+    min = abs(A[0] - remaining)
 
-        first_part += A[i]; sum_total -= A[i]; temp = abs(first_part - sum_total)
-        
-        if min > temp:
+    for i in range(1, len(A)):
+        temp = abs(first_part - remaining)
+        if min > temp: 
             min = temp
-    return min;
+        first_part += A[i]; remaining -= A[i]
+
+    return min

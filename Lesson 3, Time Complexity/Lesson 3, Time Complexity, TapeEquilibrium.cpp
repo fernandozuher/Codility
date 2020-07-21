@@ -39,7 +39,7 @@ P = 3, difference = |6 − 7| = 1
 P = 4, difference = |10 − 3| = 7
 Write a function:
 
-int solution(int A[], int N);
+int solution(vector<int> &A);
 
 that, given a non-empty array A of N integers, returns the minimal difference
 that can be achieved.
@@ -63,17 +63,18 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 14 lines. O(N)
-#include <stdlib.h> // abs()
-int solution(int A[], int N)
+// 15 lines. O(N)
+#include <numeric> // std::accumulate()
+#include <cstdlib> // abs()
+int solution(vector<int> &A)
 {
-    int remaining = 0;
-    for (int i = 1; i < N; remaining += A[i++]);
+    auto remaining {std::accumulate(A.begin()+1, A.end(), 0)};
+    auto min {(abs(A[0] - remaining))};
+    auto N {static_cast<int> (A.size())};
 
-    unsigned min = abs(A[0] - remaining);
-    for (int i = 1, first_part = A[0], temp; i < N; i++) {
-        if (min > (temp = abs(first_part - remaining)))
-            min = temp;
+    for (auto i {1}, first_part {A[0]}, temp {0}; i < N; i++) {
+        if (min > (temp = {abs(first_part - remaining)}))
+            min = {temp};
         first_part += A[i], remaining -= A[i];
     }
     return min;
