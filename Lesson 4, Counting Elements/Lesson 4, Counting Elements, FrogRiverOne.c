@@ -1,11 +1,12 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 23 May 2020
+Date: 01 August 2020
 About: codility.com -> Lesson 4, Counting Elements -> FrogRiverOne.c
 
 I solved this problem in the languages:
     C, C++, Java, Python and JavaScript. ;-)
+
 */
 
 /*
@@ -63,6 +64,10 @@ Write an efficient algorithm for the following assumptions:
 
 N and X are integers within the range [1..100,000];
 each element of array A is an integer within the range [1..X].
+
+Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+copying, publication or disclosure prohibited.
+
 */
 
 // 13 lines
@@ -71,9 +76,7 @@ int solution(int X, int A[], int N)
     if(X > N)
         return -1;
 
-    int temp[X + 1];
-    for (int i = 0; i <= X; temp[i++] = 0);
-
+    int *temp = (int*) calloc(X+1, sizeof(int));
     for (int i = 0, count = 0; i < N; i++)
         if (A[i] <= X && !temp[A[i]] && (count += temp[A[i]] = 1) == X)
             return i;
