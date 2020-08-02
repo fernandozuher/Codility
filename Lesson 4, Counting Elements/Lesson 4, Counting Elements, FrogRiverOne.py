@@ -1,10 +1,11 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 23 May 2020
+# Date: 1 August 2020
 # About: codility.com -> Lesson 4, Counting Elements -> FrogRiverOne
 # 
 # I solved this problem in the languages:
 #     C, C++, Java, Python and JavaScript. ;-)
+#
 ################################################################################
 # 
 # A small frog wants to get to the other side of a river. The frog is initially
@@ -62,15 +63,15 @@
 # N and X are integers within the range [1..100,000];
 # each element of array A is an integer within the range [1..X].
 # 
-# 11 lines
+# 11 lines. O(N)
 def solution(X, A):
     if X > len(A):
         return -1
-        
-    temp = [0] * (X + 1); count = 0
-    for i in range(len(A)):
-        if A[i] <= X and not temp[A[i]]:
-            count += 1; temp[A[i]] = 1
-        if count == X:
-            return i
+
+    N, count, temp = len(A), 0, [False] * (X + 1)
+    for i in range(N):
+        if not temp[A[i]]:
+            count, temp[A[i]] = count + 1, True
+            if count == X:
+                return i
     return -1
