@@ -1,7 +1,7 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 01 August 2020
+Date: 1 August 2020
 About: codility.com -> Lesson 4, Counting Elements -> FrogRiverOne.c
 
 I solved this problem in the languages:
@@ -70,15 +70,15 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 13 lines
+// 13 lines -> 11 lines. O(N)
 int solution(int X, int A[], int N)
 {    
     if(X > N)
         return -1;
-
-    int *temp = (int*) calloc(X+1, sizeof(int));
-    for (int i = 0, count = 0; i < N; i++)
-        if (A[i] <= X && !temp[A[i]] && (count += temp[A[i]] = 1) == X)
+    
+    char *temp = (char*) calloc(X+1, sizeof(char));
+    for (unsigned i = 0, count = 0; i < N; i++)
+        if (!temp[A[i]] && (count += temp[A[i]] = 1) == X)
             return i;
     return -1;
 }
