@@ -1,10 +1,10 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 1 August 2020
+# Date: 2 August 2020
 # About: codility.com -> Lesson 4, Counting Elements -> FrogRiverOne
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (11 lines), C++ (11 lines),
+# Java (12 lines), Python (11 lines) and JavaScript (10 lines). ;-)
 #
 ################################################################################
 # 
@@ -63,6 +63,9 @@
 # N and X are integers within the range [1..100,000];
 # each element of array A is an integer within the range [1..X].
 # 
+# Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+# copying, publication or disclosure prohibited.
+#
 # 11 lines. O(N)
 def solution(X, A):
     if X > len(A):

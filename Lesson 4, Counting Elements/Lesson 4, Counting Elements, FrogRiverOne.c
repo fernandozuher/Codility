@@ -1,11 +1,11 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 1 August 2020
+Date: 2 August 2020
 About: codility.com -> Lesson 4, Counting Elements -> FrogRiverOne.c
 
-I solved this problem in the languages:
-    C, C++, Java, Python and JavaScript. ;-)
+I solved this problem in the languages: C (11 lines), C++ (11 lines),
+Java (12 lines), Python (11 lines) and JavaScript (10 lines). ;-)
 
 */
 

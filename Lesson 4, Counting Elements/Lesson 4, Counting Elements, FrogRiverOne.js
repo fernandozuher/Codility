@@ -40,7 +40,7 @@ leaves appear in every position across the river.
 
 Write a function:
 
-int solution(int X, vector<int> &A);
+function solution(X, A);
 
 that, given a non-empty array A consisting of N integers and integer X, returns
 the earliest time when the frog can jump to the other side of the river.
@@ -70,15 +70,14 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 11 lines. O(N)
-int solution(int X, vector<int> &A)
-{    
-    if (X > static_cast<int>(A.size()))
-        return -1;
+// 10 lines. O(N)
+function solution(X, A) {
+    if (X > A.length)
+        return -1
     
-    std::vector<bool> temp(X+1, false);
-    for (int i {0}, count {0}, N {static_cast<int>(A.size())}; i < N; i++)
-        if (!temp[A[i]] && (temp[A[i]] = true) && ++count == X)
-            return i;
-    return -1;
+    let temp = Array(X+1).fill(false)
+    for (let i = 0, count = 0, N = A.length; i < N; i++)
+        if (!temp[A[i]] && (temp[A[i]] = true) && ++count === X)
+            return i
+    return -1
 }
