@@ -1,12 +1,15 @@
 # Author: Fernando Zuher
-# Place: Brazil
-# Date: 24 May 2020
+# Place: São Paulo, Brazil
+# Date: 11 August 2020
 # About: codility.com -> Lesson 4, Counting Elements -> PermCheck
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (13 lines), C++ (7 lines),
+# Java (14 lines), Python (2 lines) and JavaScript (3 lines). ;-)
+#
 ################################################################################
-# 
+# Source:
+# https://app.codility.com/programmers/lessons/4-counting_elements/perm_check/
+#
 # A non-empty array A consisting of N integers is given.
 # 
 # A permutation is a sequence containing each element from 1 to N once, and
@@ -54,12 +57,9 @@
 # N is an integer within the range [1..100,000];
 # each element of array A is an integer within the range [1..1,000,000,000].
 #
-################################################################################
+# Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+# copying, publication or disclosure prohibited.
 #
-# Complexity:
-# 	len(A) = O(1); max(A) = O(N); set(A) = O(N);
-# 	int(...) = O(it is supposed to be 1 when converting Boolean).
-# 	TOTAL = '1' + 1 + N + 1 + N + 1 = 2N + 4 = O(N)
-# 2 lines
+# 2 lines. O(N) or O(N * log(N))
 def solution(A):
-    return int(len(set(A)) == len(A) and max(A) == len(A))
+    return int(max(A) == len(A) and len(set(A)) == len(A))

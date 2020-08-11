@@ -34,7 +34,7 @@ The goal is to check whether array A is a permutation.
 
 Write a function:
 
-int solution(int A[], int N);
+function solution(A);
 
 that, given an array A, returns 1 if array A is a permutation and 0 if it is
 not.
@@ -64,17 +64,7 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 13 lines. O(N log N) because of qsort().
-#include <stdlib.h> // qsort()
-int compare (const void * a, const void * b)
-{
-  return ( *(int*)a - *(int*)b );
-}
-
-int solution(int A[], int N)
-{
-	qsort(A, N, sizeof(int), compare);
-	int i;
-	for (i = 0; i < N && A[i] == i+1; i++);
-	return i == N;
+// 3 lines. O(N) or O(N * log(N))
+function solution(A) {
+    return (Math.max(...A) === A.length && new Set(A).size === A.length) & 1
 }

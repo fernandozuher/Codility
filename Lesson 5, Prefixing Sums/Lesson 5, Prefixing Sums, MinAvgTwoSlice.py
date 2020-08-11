@@ -60,7 +60,28 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 # copying, publication or disclosure prohibited.
 # 
-# lines. O(N^2) =/
+# THIS IS NOT WORKING
+def solution(A):
+    lim = len(A) - 1
+    min_average = 10_000
+    i_min = 0
+    A_prefix = [0] * (len(A)+1)
+
+    A_prefix[0] = 0
+    for i in range(1, len(A)):
+        A_prefix[i] = A_prefix[i-1] + A[i]
+
+    for i in range(1, lim):
+        
+        for j in range(i+1, len(A)):
+            
+            temp = (A_prefix[j] - A_prefix[i-1]) / j
+            if min_average > temp:
+                min_average = temp
+                i_min = i
+    return i_min
+
+# lines. O(N^2) =/ THIS IS WORKING.
 def solution(A):
     lim = len(A) - 1
     min_average = 10_000

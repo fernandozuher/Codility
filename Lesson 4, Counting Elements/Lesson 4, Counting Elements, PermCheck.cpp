@@ -34,7 +34,7 @@ The goal is to check whether array A is a permutation.
 
 Write a function:
 
-int solution(int A[], int N);
+int solution(vector<int> &A);
 
 that, given an array A, returns 1 if array A is a permutation and 0 if it is
 not.
@@ -61,20 +61,13 @@ each element of array A is an integer within the range [1..1,000,000,000].
 
 Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 copying, publication or disclosure prohibited.
-
 */
 
-// 13 lines. O(N log N) because of qsort().
-#include <stdlib.h> // qsort()
-int compare (const void * a, const void * b)
+// 7 lines. O(N) or O(N * log(N))
+#include <algorithm>
+#include <unordered_set>
+int solution(vector<int> &A)
 {
-  return ( *(int*)a - *(int*)b );
-}
-
-int solution(int A[], int N)
-{
-	qsort(A, N, sizeof(int), compare);
-	int i;
-	for (i = 0; i < N && A[i] == i+1; i++);
-	return i == N;
+    return *std::max_element(A.begin(), A.end()) == static_cast<int>(A.size())
+        && (std::unordered_set<int> {A.begin(), A.end()}).size() == A.size();
 }
