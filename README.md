@@ -9,17 +9,17 @@ I have practiced my programming poliglotysm in [Codility for Programmers](https:
 For me, writing code in several programming languages has been a way of relaxing. 😌
 
 All problems are solved in the 5 aforementioned languages.
-I write code in a language by just following the way of thinking in the own language. I did not just translate the solution written in a language to another. For example: 
+I write code in a language by just following the way of thinking in the own language. I ***did not*** just translate the solution written in a language to another. For example, some particular ways of thinking in the languages:
 
-| C | C++ | Java | Python | JavaScript
-| :---: | :---: | :---: | :---: | :---: |
-`=` | `{}` list-initializer | `=` | `=` | `=` |
-primitive types | `auto` (without `{}` list-initializer) | primitive types | - | `let` |
-`NULL` | `nullptr` | `null` | `None` | `null` |
-traditional array | `std::vector` | traditional array | `list` | Array class |
-`malloc` | `new` | `new` | - | - |
-traditional for-loop | range-based for-loop | range-based ... | range-based ... | range-based ... |
-boolean values `0` or `!= 0` | `false`, `true` | `false`, `true`  | `False`, `True` |  `false`, `true` |
+What | C | C++ | Java | Python | JavaScript
+:---: | :---: | :---: | :---: | :---: | :---: |
+initializer | `=` | `{}` list-initializer | `=` | `=` | `=` |
+primitive types | primitive ... | `auto` (without `{}` list-initializer) | primitive ... | - | `let` |
+*null* value | `NULL` | `nullptr` | `null` | `None` | `null` |
+traditional array | [] | `std::vector` | [] | `list` | Array class |
+Dynamic allocation | `malloc` | `new` | `new` | - | - |
+for-loop | traditional `for ( ; ; )` | *range-based* `for (auto i : array)` | *range-based* `for (i : array)` | *range-based* `for i in array:` | *for...in* , *for...of*  `for (let i in array)` or `for (let i of array)` |
+boolean values | `0` or `!= 0` | `false`, `true` | `false`, `true`  | `False`, `True` |  `false`, `true` |
 
 The folders in this repository are self-descriptive.
 
