@@ -23,6 +23,6 @@ What | C | C++ | Java | Python | JavaScript
 
 *Although I could use a particular language-style in other languages, it is not good avoid the own particular language-facilities.*
 
-The folders in this repository are self-descriptive.
+The folders and files in this repository are self-descriptive when you browse the lessons in the [Codility for Programmers](https://app.codility.com/programmers) site.
 
 Feel free to look at my solutions for the programming problems. Make contact with fernando.zuher@gmail.com in case of any doubt. :-)
