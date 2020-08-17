@@ -21,6 +21,8 @@ Dynamic allocation | `malloc` | `new` | `new` | - | - |
 for-loop | traditional `for ( ; ; )` | *range-based* `for (auto i : array)` | *range-based* `for (i : array)` | *range-based* `for i in array:` | *for...in* , *for...of*  `for (let i in array)` or `for (let i of array)` |
 boolean values | `0` or `!= 0` | `false`, `true` | `false`, `true`  | `False`, `True` |  `false`, `true` |
 
+*Although I could use a particular language-style in other languages, it is not good avoid the own particular language-facilities.*
+
 The folders in this repository are self-descriptive.
 
 Feel free to look at my solutions for the programming problems. Make contact with fernando.zuher@gmail.com in case of any doubt. :-)
