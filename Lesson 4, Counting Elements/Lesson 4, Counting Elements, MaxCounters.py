@@ -1,6 +1,6 @@
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 25 May 2020
+# Date: 22 August 2020
 # About: codility.com -> Lesson 4, Counting Elements -> MaxCounters
 # 
 # I solved this problem in the languages:
@@ -62,25 +62,29 @@
 # N and M are integers within the range [1..100,000];
 # each element of array A is an integer within the range [1..N + 1].
 # 
-# 21 lines. Complexity: O(N + M)
+# 25 lines, O(N + M)
 def solution(N, A):
-
-	SIZE = N+1
+	
+	SIZE = N + 1
 	counter = [0] * SIZE
 	max = 0; flag_max = False; current_max = 0
 	
 	for value in A:
+
 		if value < SIZE:
 			if flag_max:
 				counter = [0] * SIZE
-				flag_max = False;
+				flag_max = False
 			
 			counter[value] += 1
-			if counter[value] > current_max: current_max += 1
-		
-		elif not flag_max:
-			flag_max = True; max = max + current_max; current_max = 0
+			if counter[value] > current_max:
+				current_max += 1
 
-	if flag_max: counter = [max] * SIZE
-	elif max: counter = [max + value for value in counter]
+		elif not flag_max:
+			max += current_max; flag_max = True; current_max = 0
+
+	if flag_max:
+		counter = [max] * SIZE
+	elif max:
+		counter = [max + value for value in counter]
 	return counter[1:]

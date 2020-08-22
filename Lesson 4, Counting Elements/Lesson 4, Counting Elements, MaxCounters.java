@@ -4,8 +4,7 @@ Place: Brazil
 Date: 22 August 2020
 About: codility.com -> Lesson 4, Counting Elements -> MaxCounters
 
-I solved this problem in the languages: C (25 lines), C++ (26 lines),
-Java, Python (25 lines) and JavaScript. ;-)
+I solved this problem in the languages: C (25 lines), C++ (), Java, Python and JavaScript. ;-)
 */
 
 /*
@@ -39,21 +38,14 @@ the values of the counters after each consecutive operation will be:
     (3, 2, 2, 4, 2)
 The goal is to calculate the value of every counter after all operations.
 
-Assume that the following declarations are given:
-
-struct Results {
-  int * C;
-  int L; // Length of the array
-};
-
 Write a function:
 
-struct Results solution(int N, int A[], int M);
+    class Solution { public int[] solution(int N, int[] A); }
 
 that, given an integer N and a non-empty array A consisting of M integers,
 returns a sequence of integers representing the values of the counters.
 
-Result array should be returned as a structure Results.
+Result array should be returned as a vector of integers.
 
 For example, given:
 
@@ -71,30 +63,30 @@ Write an efficient algorithm for the following assumptions:
 N and M are integers within the range [1..100,000];
 each element of array A is an integer within the range [1..N + 1].
 */
+class Solution {
+    public int[] solution(int N, int[] A) {
 
-// 25 lines, O(N + M)
-#include <string.h>
-struct Results solution(int N, int A[], int M)
-{
-    int *counter = (int*) calloc(N + 1, sizeof(int));
-    int max = 0, flag_max = 0, size = N + 1;
+        int[] counter = new int[N + 1];
+        int current_max = 0, max = 0, size = N + 1;
+        bool flag_max = false;
 
-    for (int i = 0, current_max = 0; i < M; i++)
+        for (auto value : A)
 
-        if (A[i] < size) {
-            if (flag_max) {
-                memset(counter, 0, (N + 1) * sizeof(int)); // because N + 1
-                flag_max = 0;
+            if (value < size) {
+                if (flag_max) { // memset is faster than std::fill() during the evaluation of this exercise
+                    memset(&counter[0], 0, sizeof(counter[0]) * counter.size());
+                    flag_max = false;
+                }
+                if (++counter[value] > current_max)
+                    current_max++;
             }
-            if (++counter[A[i]] > current_max)
-                current_max++;
-        }
-        else if (!flag_max)
-            max += current_max, flag_max = 1, current_max = 0;
+            else if (!flag_max)
+                max += current_max, flag_max = true, current_max = 0;
 
-    if (flag_max)
-        for (int i = 1; i < size; counter[i++] = max);
-    else if (max)
-        for (int i = 1; i < size; counter[i++] += max);
-    return (struct Results) {++counter, N};
+        if (flag_max)
+            std::fill(counter.begin(), counter.end(), max);
+        else if (max)
+            for(auto& value : counter) value += max;
+        return {counter.begin() + 1, counter.end()};
+    }
 }
