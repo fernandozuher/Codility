@@ -5,7 +5,7 @@ Date: 22 August 2020
 About: codility.com -> Lesson 4, Counting Elements -> MaxCounters
 
 I solved this problem in the languages: C (25 lines), C++ (26 lines),
-Java, Python (25 lines) and JavaScript. ;-)
+Java (33 lines), Python (25 lines) and JavaScript. ;-)
 */
 
 /*

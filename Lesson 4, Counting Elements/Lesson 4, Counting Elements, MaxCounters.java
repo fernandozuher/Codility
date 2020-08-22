@@ -63,30 +63,38 @@ Write an efficient algorithm for the following assumptions:
 N and M are integers within the range [1..100,000];
 each element of array A is an integer within the range [1..N + 1].
 */
+
+// 33 lines, O(N + M)
+import java.util.Arrays;
+
 class Solution {
     public int[] solution(int N, int[] A) {
 
         int[] counter = new int[N + 1];
         int current_max = 0, max = 0, size = N + 1;
-        bool flag_max = false;
+        boolean flag_max = false;
 
-        for (auto value : A)
+        for (int value : A)
 
             if (value < size) {
-                if (flag_max) { // memset is faster than std::fill() during the evaluation of this exercise
-                    memset(&counter[0], 0, sizeof(counter[0]) * counter.size());
+                if (flag_max) {
+                    // Arrays.fill(counter, 0); // large_random2 running time: 3.956 sec., time limit: 2.944 sec.
+                    counter = new int[size]; // large_random2 0.892s OK
                     flag_max = false;
                 }
                 if (++counter[value] > current_max)
                     current_max++;
             }
-            else if (!flag_max)
-                max += current_max, flag_max = true, current_max = 0;
+            else if (!flag_max) {
+                max += current_max;
+                flag_max = true;
+                current_max = 0;
+            }
 
         if (flag_max)
-            std::fill(counter.begin(), counter.end(), max);
-        else if (max)
-            for(auto& value : counter) value += max;
-        return {counter.begin() + 1, counter.end()};
+            Arrays.fill(counter, max);
+        else if (max != 0)
+            for (int i = 1; i < size; counter[i++] += max);
+        return Arrays.copyOfRange(counter, 1, size);
     }
 }
