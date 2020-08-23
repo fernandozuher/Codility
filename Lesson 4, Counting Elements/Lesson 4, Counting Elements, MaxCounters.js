@@ -4,7 +4,8 @@ Place: Brazil
 Date: 22 August 2020
 About: codility.com -> Lesson 4, Counting Elements -> MaxCounters
 
-I solved this problem in the languages: C (25 lines), C++ (), Java, Python and JavaScript. ;-)
+I solved this problem in the languages: C (25 lines), C++ (26 lines),
+Java (33 lines), Python (24 lines) and JavaScript (27 lines). ;-)
 */
 
 /*
@@ -62,6 +63,10 @@ Write an efficient algorithm for the following assumptions:
 
 N and M are integers within the range [1..100,000];
 each element of array A is an integer within the range [1..N + 1].
+
+Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+copying, publication or disclosure prohibited.
+
 */
 
 // 27 lines, O(N + M)
@@ -78,7 +83,7 @@ function solution(N, A) {
                 flag_max = false
             }
             if (++counter[value] > current_max)
-                current_max++;
+                current_max++
         }
         else if (!flag_max) {
             max += current_max
@@ -87,8 +92,8 @@ function solution(N, A) {
         }
 
     if (flag_max)
-        counter.fill(max);
-    else if (max != 0)
-        counter.map(function(item) { return item + max });
+        counter.fill(max)
+    else if (max)
+        counter = counter.map(function(item) { return item + max })
     return counter.slice(1, size)
 }
