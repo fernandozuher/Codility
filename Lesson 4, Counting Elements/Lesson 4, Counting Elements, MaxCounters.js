@@ -40,7 +40,7 @@ The goal is to calculate the value of every counter after all operations.
 
 Write a function:
 
-    class Solution { public int[] solution(int N, int[] A); }
+    function solution(N, A);
 
 that, given an integer N and a non-empty array A consisting of M integers,
 returns a sequence of integers representing the values of the counters.
@@ -64,37 +64,31 @@ N and M are integers within the range [1..100,000];
 each element of array A is an integer within the range [1..N + 1].
 */
 
-// 33 lines, O(N + M)
-import java.util.Arrays;
+// 27 lines, O(N + M)
+function solution(N, A) {
 
-class Solution {
-    public int[] solution(int N, int[] A) {
+    let current_max = 0, max = 0, size = N + 1, flag_max = false
+    let counter = new Array(size).fill(0)
 
-        int current_max = 0, max = 0, size = N + 1;
-        int[] counter = new int[size];
-        boolean flag_max = false;
+    for (let value of A)
 
-        for (int value : A)
-
-            if (value < size) {
-                if (flag_max) {
-                    // Arrays.fill(counter, 0); // large_random2 running time: 3.956 sec., time limit: 2.944 sec.
-                    counter = new int[size]; // large_random2 0.892s OK
-                    flag_max = false;
-                }
-                if (++counter[value] > current_max)
-                    current_max++;
+        if (value < size) {
+            if (flag_max) {
+                counter.fill(0)
+                flag_max = false
             }
-            else if (!flag_max) {
-                max += current_max;
-                flag_max = true;
-                current_max = 0;
-            }
+            if (++counter[value] > current_max)
+                current_max++;
+        }
+        else if (!flag_max) {
+            max += current_max
+            flag_max = true
+            current_max = 0
+        }
 
-        if (flag_max)
-            Arrays.fill(counter, max);
-        else if (max != 0)
-            for (int i = 1; i < size; counter[i++] += max);
-        return Arrays.copyOfRange(counter, 1, size);
-    }
+    if (flag_max)
+        counter.fill(max);
+    else if (max != 0)
+        counter.map(function(item) { return item + max });
+    return counter.slice(1, size)
 }

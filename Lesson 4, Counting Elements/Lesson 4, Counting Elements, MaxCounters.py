@@ -62,12 +62,11 @@
 # N and M are integers within the range [1..100,000];
 # each element of array A is an integer within the range [1..N + 1].
 # 
-# 25 lines, O(N + M)
+# 24 lines, O(N + M)
 def solution(N, A):
-	
-	SIZE = N + 1
+
+	current_max, max, SIZE, flag_max = 0, 0, N + 1, False
 	counter = [0] * SIZE
-	max = 0; flag_max = False; current_max = 0
 	
 	for value in A:
 

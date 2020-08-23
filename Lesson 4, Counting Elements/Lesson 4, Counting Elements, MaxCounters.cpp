@@ -70,8 +70,8 @@ each element of array A is an integer within the range [1..N + 1].
 #include <cstring> // memset()
 vector<int> solution(int N, vector<int> &A)
 {
-    std::vector<int> counter(N + 1);
     int current_max {}, max {}, size {N + 1};
+    std::vector<int> counter(size);
     bool flag_max {false};
 
     for (auto value : A)

@@ -5,7 +5,7 @@ Date: 22 August 2020
 About: codility.com -> Lesson 4, Counting Elements -> MaxCounters
 
 I solved this problem in the languages: C (25 lines), C++ (26 lines),
-Java (33 lines), Python (25 lines) and JavaScript. ;-)
+Java (33 lines), Python (24 lines) and JavaScript (27 lines). ;-)
 */
 
 /*
@@ -76,8 +76,8 @@ each element of array A is an integer within the range [1..N + 1].
 #include <string.h>
 struct Results solution(int N, int A[], int M)
 {
-    int *counter = (int*) calloc(N + 1, sizeof(int));
     int max = 0, flag_max = 0, size = N + 1;
+    int *counter = (int*) calloc(size, sizeof(int));
 
     for (int i = 0, current_max = 0; i < M; i++)
 
