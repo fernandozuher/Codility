@@ -13,7 +13,7 @@ Source: https://app.codility.com/programmers/lessons/5-prefix_sums/count_div/
 
 Write a function:
 
-int solution(int A, int B, int K);
+class Solution { public int solution(int A, int B, int K); }
 
 that, given three integers A, B and K, returns the number of integers within
 the range [A..B] that are divisible by K, i.e.:
@@ -35,9 +35,11 @@ Unauthorized copying, publication or disclosure prohibited.
 
 */
 
-// before 15 lines, then 5 lines, O(1)
-int solution(int A, int B, int K)
-{
-    int temp = (B - A) / K;
-    return (!(A % K) || !(B % K) || (A < K && (B%K + K-A) < K)) ? ++temp : temp;
+// 7 lines, O(1)
+class Solution {
+    public int solution(int A, int B, int K) {
+        int temp = (B - A) / K;
+        boolean is = ((A % K) == 0 || (B % K) == 0 || (A < K && (B%K + K-A) < K));
+        return is ? ++temp : temp;
+    }
 }

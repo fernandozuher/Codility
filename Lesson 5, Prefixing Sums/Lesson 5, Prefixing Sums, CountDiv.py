@@ -1,13 +1,16 @@
+#
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 29 June 2020
+# Date: 10 Sept 2020
 # About: codility.com -> Lesson 5, Prefixing Sums -> CountDiv
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (5 lines), C++ (5 lines),
+# Java (7 lines), Python (3 lines) and JavaScript (4 lines). ;-)
 #
 ##############################################################################
-# 
+#
+# Source: https://app.codility.com/programmers/lessons/5-prefix_sums/count_div/
+#
 # Write a function:
 # 
 # def solution(A, B, K)
@@ -30,7 +33,7 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 # copying, publication or disclosure prohibited.
 #
-# 3 lines
+# 3 lines, O(1)
 def solution(A, B, K):
-    return int((B - A) / K)+1 if (not(A % K) or not(B % K) or
-              (A < K and (B%K + K-A) < K)) else int((B - A) / K)
+    temp = int((B - A) / K)
+    return temp+1 if (not(A % K) or not(B % K) or (A < K and (B%K + K-A) < K)) else temp

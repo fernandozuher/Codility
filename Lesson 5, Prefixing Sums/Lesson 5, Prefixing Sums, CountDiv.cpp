@@ -35,9 +35,9 @@ Unauthorized copying, publication or disclosure prohibited.
 
 */
 
-// before 15 lines, then 5 lines, O(1)
+// 5 lines, O(1)
 int solution(int A, int B, int K)
 {
-    int temp = (B - A) / K;
+    int temp {(B - A) / K};
     return (!(A % K) || !(B % K) || (A < K && (B%K + K-A) < K)) ? ++temp : temp;
 }
