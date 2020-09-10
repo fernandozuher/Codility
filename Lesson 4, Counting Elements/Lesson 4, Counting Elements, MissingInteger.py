@@ -1,12 +1,16 @@
+#
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 24 May 2020
+# Date: 09 Sept 2020
 # About: codility.com -> Lesson 4, Counting Elements -> MissingInteger
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (11 lines), C++ (13 lines),
+# Java (14 lines), Python (12 lines) and JavaScript (11 lines). ;-)
+#
 ################################################################################
-# 
+#
+# Source: https://app.codility.com/programmers/lessons/4-counting_elements/missing_integer/
+#
 # This is a demo task.
 # 
 # Write a function:
@@ -27,14 +31,16 @@
 # N is an integer within the range [1..100,000];
 # each element of array A is an integer within the range [−1,000,000..1,000,000].
 # 
-# 10 lines
+# 12 lines, O(N) or O(N * log(N))
 def solution(A):
+    N = len(A)
+    temp = [False] * (N + 1)
 
-    N = len(A); temp = ['0'] * (N + 1);
     for i in range(N):
         if A[i] > 0 and A[i] <= N:
-            temp[A[i]] = '1';
+            temp[A[i]] = True
 
-    try: index = 1 + temp[1:].index('0')
-    except ValueError: return N + 1
-    else: return index
+    try:
+        return 1 + temp[1:].index(False)
+    except ValueError:
+        return N + 1

@@ -15,7 +15,7 @@ This is a demo task.
 
 Write a function:
 
-int solution(int A[], int N);
+function solution(A);
 
 that, given an array A of N integers, returns the smallest positive integer
 (greater than 0) that does not occur in A.
@@ -37,14 +37,14 @@ copying, publication or disclosure prohibited.
 */
 
 // 11 lines, O(N) or O(N * log(N))
-int solution(int A[], int N)
-{
-    char *temp = (char*) calloc(N + 1, sizeof(char));
-    for (int i = 0; i < N; i++)
-        if (A[i] > 0 && A[i] <= N)
-            temp[A[i]] = 1;
+function solution(A) {
+    const N = A.length
+    const temp = Array(N + 1).fill(false)
 
-    int i;
-    for (i = 1; i < N + 1 && temp[i] == 1; i++);
-    return i;
+    for (const value of A)
+        if (value > 0 && value <= N)
+            temp[value] = true
+    
+    const i = temp.indexOf(false, 1)
+    return i != -1 ? i : N+1
 }

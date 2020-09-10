@@ -15,7 +15,7 @@ This is a demo task.
 
 Write a function:
 
-int solution(int A[], int N);
+int solution(vector<int> &A);
 
 that, given an array A of N integers, returns the smallest positive integer
 (greater than 0) that does not occur in A.
@@ -36,15 +36,17 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 11 lines, O(N) or O(N * log(N))
-int solution(int A[], int N)
+// 12 lines, O(N) or O(N * log(N))
+#include <algorithm>
+int solution(vector<int> &A)
 {
-    char *temp = (char*) calloc(N + 1, sizeof(char));
-    for (int i = 0; i < N; i++)
-        if (A[i] > 0 && A[i] <= N)
-            temp[A[i]] = 1;
+    const int N = A.size();
+    vector<bool> temp(N + 1, false);
 
-    int i;
-    for (i = 1; i < N + 1 && temp[i] == 1; i++);
-    return i;
+    for (auto value : A)
+        if (value > 0 && value <= N)
+            temp[value] = true;
+    
+    auto it = std::find(temp.begin()+1, temp.end(), false);
+    return it != temp.end() ? it-temp.begin() : temp.size();
 }
