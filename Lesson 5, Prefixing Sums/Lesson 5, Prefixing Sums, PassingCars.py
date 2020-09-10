@@ -1,12 +1,15 @@
+#
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 30 June 2020
+# Date: 10 September 2020
 # About: codility.com -> Lesson 5, Prefixing Sums -> PassingCars
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (12 lines), C++ (12 lines),
+# Java (13 lines), Python (10 lines) and JavaScript (11 lines). ;-)
 # 
 ############################################################################## 
+#
+# Source: https://app.codility.com/programmers/lessons/5-prefix_sums/passing_cars/ 
 #
 # A non-empty array A consisting of N integers is given. The consecutive
 # elements of array A represent consecutive cars on a road.
@@ -56,12 +59,14 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 # copying, publication or disclosure prohibited.
 # 
-# 8 lines, O(N)
+# 10 lines, O(N)
 def solution(A):
     zeros, total = 0, 0
-    for v in A:
-        if v:
+    for value in A:
+        if value:
             total += zeros
-            if total > 1.0e9: return -1
-        else: zeros += 1
+            if total > 1.0e9:
+                return -1
+        else:
+            zeros += 1
     return total
