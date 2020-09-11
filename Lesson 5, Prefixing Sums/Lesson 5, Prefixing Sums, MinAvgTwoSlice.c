@@ -59,9 +59,22 @@ each element of array A is an integer within the range [−10,000..10,000].
 
 Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 copying, publication or disclosure prohibited.
+
 */
 
 // Before 22 lines, then lines. O()
+int solution(int A[], int N)
+{
+    float min = 10000.0;
+    int index_min = 0;
+    for (int i = 1; i < N; i++)
+        if ((A[i-1] + A[i])/2.0 < min) {
+            min = (A[i-1] + A[i])/2.0;
+            index_min = i-1;
+        }
+    return index_min;
+}
+
 int solution(int A[], int N){
 
 	int iMin=0, temp[N];

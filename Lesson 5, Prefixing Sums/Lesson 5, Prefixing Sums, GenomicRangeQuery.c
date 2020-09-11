@@ -1,7 +1,7 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 30 June 2020
+Date: 10 September 2020
 About: codility.com -> Lesson 5, Prefixing Sums -> GenomicRangeQuery
 
 I solved this problem in the languages:
@@ -9,6 +9,8 @@ I solved this problem in the languages:
 */
 
 /*
+Source: https://app.codility.com/programmers/lessons/5-prefix_sums/genomic_range_query/
+
 A DNA sequence can be represented as a string consisting of the letters A, C,
 G and T, which correspond to the types of successive nucleotides in the
 sequence. Each nucleotide has an impact factor, which is an integer.
@@ -71,6 +73,7 @@ string S consists only of upper-case English letters A, C, G, T.
 
 Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 copying, publication or disclosure prohibited.
+
 */
 
 //struct Results {
@@ -78,20 +81,44 @@ copying, publication or disclosure prohibited.
 //  int M; // Length of the array
 //};
 
-// 16 lines, O(N*M), 62% =/
+// Before 16 lines, then 
+// O(N*M), 62% =/
 #include <stdlib.h>
+#include <string.h> // strlen()
 
-#define convert(NuCl_) \
-            ((NuCl_) == 'A' ? 1 : (NuCl_) == 'C' ? 2 : (NuCl_) == 'G' ? 3 : 4)
+inline int convert(int nucl)
+{
+    return nucl == 'A' ? 1 : nucl == 'C' ? 2 : nucl == 'G' ? 3 : 4;
+}
 
 struct Results solution(char *S, int P[], int Q[], int M)
 {
     int *expected_array = (int*) malloc(sizeof(int)*M);
+    
     for (int i = 0, j, min; i < M; ++i) {
         for (j = P[i], min = 'T'; j <= Q[i]; ++j)
-            if (S[j] < min)
+            if (S[j] < min) {
                 min = S[j];
+                if (min == 1)
+                    break;
+            }
         expected_array[i] = convert(min);
     }
     return (struct Results) { expected_array, M };
 }
+
+/*
+    const int N = strlen(S);
+    int pref[N+1];
+    pref[0] = 0;
+    char *temp = S;
+
+    for (i = 1; i < N + 1; i++)
+        pref[i] = pref[i-1] + convert(*temp++);
+
+    int expected_array[M];
+    for (int i = 0; i < M; i++)
+        expected_array[i] = pref[Q[i]] - pref[P[i]]
+
+        
+        */

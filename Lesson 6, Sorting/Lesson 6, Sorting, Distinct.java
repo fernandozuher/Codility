@@ -13,7 +13,7 @@ Source: https://app.codility.com/programmers/lessons/6-sorting/distinct/
 
 Write a function
 
-    int solution(int A[], int N);
+    class Solution { public int solution(int[] A); }
 
 that, given an array A consisting of N integers, returns the number of
 distinct values in array A.
@@ -35,21 +35,11 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 17 lines, O(N*log(N)) or O(N)
-#include <stdlib.h>
-
-int compare(const void * a, const void * b)
-{
-  return ( *(int*)a - *(int*)b );
-}
-
-int solution(int A[], int N)
-{
-	qsort(A, N, sizeof(int), compare);
-	int count = 1;
-
-	for (int i = 1; i < N; i++)
-		if (A[i] != A[i-1]) 
-			count++;
-	return N > 0 ? count : 0;
+// 7 lines, O(N*log(N)) or O(N)
+import java.util.*;
+class Solution {
+    public int solution(int[] A) {
+        Integer[] array = Arrays.stream( A ).boxed().toArray( Integer[]::new );
+        return (new HashSet<>(Arrays.asList(array))).size();
+    }
 }

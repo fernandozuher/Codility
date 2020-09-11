@@ -1,15 +1,19 @@
+#
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 04 July 2020
+# Date: 11 September 2020
 # About: codility.com -> Lesson 6, Sorting -> Distinct.py
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (17 lines), C++ (5 lines),
+# Java (7 lines), Python (2 lines) and JavaScript (3 lines). ;-)
 #
 ############################################################################## 
+#
+# Source: https://app.codility.com/programmers/lessons/6-sorting/distinct/
+#
 # Write a function
 # 
-# def solution(A)
+#       def solution(A)
 # 
 # that, given an array A consisting of N integers, returns the number of
 # distinct values in array A.
@@ -30,6 +34,6 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 # copying, publication or disclosure prohibited.
 #
-# 2 lines. O(N*log(N)) or O(N).
+# 2 lines, O(N*log(N)) or O(N)
 def solution(A):
 	return len(set(A))
