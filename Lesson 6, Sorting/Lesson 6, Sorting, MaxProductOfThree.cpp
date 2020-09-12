@@ -31,7 +31,7 @@ Your goal is to find the maximal product of any triplet.
 
 Write a function:
 
-    int solution(int A[], int N);
+    int solution(vector<int> &A);
 
 that, given a non-empty array A, returns the value of the maximal product of
 any triplet.
@@ -56,18 +56,15 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 16 lines, O(N * log(N))
-int compare (const void * a, const void * b)
+// 13 lines, O(N * log(N))
+#include <algorithm> // std::sort()
+int solution(vector<int> &A)
 {
-    return ( *(int*)a - *(int*)b );
-}
+    std::sort(A.begin(), A.end());
 
-int solution(int A[], int N)
-{
-    qsort (A, N, sizeof(int), compare);
-
-    int max_prod = A[N-1] * A[N-2] * A[N-3];
-    int temp = max_prod;
+    const int N {static_cast<int>(A.size())};
+    const int max_prod {A[N-1] * A[N-2] * A[N-3]};
+    int temp {max_prod};
 
     if (A[1] < 0)
         temp = A[0]*A[1] * A[N-1];
@@ -76,54 +73,23 @@ int solution(int A[], int N)
 
 /*
 // PEDANT CODE
-// 49 lines, O(N * log(N))
-#define OPERANDS 3
-
-void initialize_maxs_mins(int *maxs, int *mins, int index);
-void look_maxs_mins(int *A, int N, int *maxs, int *mins, int index);
-
-int solution(int A[], int N)
+#include <algorithm>
+#include <numeric>
+int solution(vector<int> &A)
 {
-	int maxs[OPERANDS] = {0}, mins[OPERANDS] = {0}, prod_max = 1;
-	for (int i = 0; i < OPERANDS; i++) {
-		initialize_maxs_mins(maxs, mins, i);
-		look_maxs_mins(A, N, maxs, mins, i);
-		prod_max *= A[maxs[i]];
-	}
-	int temp;
-	return (A[mins[1]] < 0 && (temp = A[mins[0]] * A[mins[1]] * A[maxs[0]])
-			> prod_max) ? temp : prod_max;
+    std::nth_element(A.begin(), A.begin() + 2, A.end());
+    std::vector<int> smallest_elements {A.begin(), A.begin() + 3};
+    std::sort(smallest_elements.begin(), smallest_elements.end());
+
+    std::nth_element(A.begin(), A.begin() + 2, A.end(), std::greater<int>());
+    std::vector<int> largest_elements {A.begin(), A.begin() + 3};
+    std::sort(largest_elements.begin(), largest_elements.end());
+
+    auto max_prod = std::accumulate(std::end(A)-3, std::end(A), 1, std::multiplies<>());
+    auto temp = max_prod;
+
+    if (A[1] < 0)
+        temp = A.front()*A[1] * A.back();
+    return temp >= max_prod ? temp : max_prod;
 }
-
-void initialize_maxs_mins(int *maxs, int *mins, int index)
-{
-	if (index == 1) {
-		maxs[1] = maxs[0] != 0 ? 0 : 1;
-		mins[1] = mins[0] != 0 ? 0 : 1;
-	}
-	else // mins[2] is not used, so it doesn't matter its value.
-		for (int i = 0; i < OPERANDS; ++i)
-			if (maxs[0] != i && maxs[1] != i) {
-				maxs[2] = mins[2] = i;
-				break;
-			}
-}
-
-void look_maxs_mins(int *A, int N, int *maxs, int *mins, int index)
-{
-	for (int i=0, flag_max=1, flag_min=1; i < N; flag_max = flag_min = ++i) {
-
-		for (int j = 0; j <= index; ++j) {
-			if (i == maxs[j])
-				flag_max = 0;
-			if (i == mins[j])
-				flag_min = 0;
-		}
-
-		if (flag_max && A[maxs[index]] < A[i])
-			maxs[index] = i;			
-		if (flag_min && A[mins[index]] > A[i])
-			mins[index] = i;
-	}
-}
-*/
+*/ 

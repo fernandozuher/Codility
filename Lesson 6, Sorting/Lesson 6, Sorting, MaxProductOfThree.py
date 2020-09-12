@@ -1,12 +1,15 @@
+#
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 05 July 2020
-# About: codility.com -> Lesson 6, Sorting -> MaxProductOfThree.c
+# Date: 11 September 2020
+# About: codility.com -> Lesson 6, Sorting -> MaxProductOfThree
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (16 lines), C++ (13 lines),
+# Java (14 lines), Python (9 lines) and JavaScript (11 lines). ;-)
 # 
 ##############################################################################
+#
+# Source: https://app.codility.com/programmers/lessons/6-sorting/max_product_of_three/
 #
 # A non-empty array A consisting of N integers is given. The product of
 # triplet (P, Q, R) equates to A[P] * A[Q] * A[R] (0 ≤ P < Q < R < N).
@@ -28,7 +31,7 @@
 # 
 # Write a function:
 # 
-# def solution(A)
+#   def solution(A)
 # 
 # that, given a non-empty array A, returns the value of the maximal product of
 # any triplet.
@@ -52,7 +55,22 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 # copying, publication or disclosure prohibited.
 #
-# 11 lines. O(N * log(N)).
+# 9 lines, O(N * log(N))
+def solution(A):
+    A.sort()
+
+    N = len(A)
+    temp = max_prod = A[N-1] * A[N-2] * A[N-3]
+
+    if A[1] < 0:
+        temp = A[0]*A[1] * A[N-1]
+    return temp if temp >= max_prod else max_prod
+
+"""
+# PEDANT CODE
+
+# 11 lines, O(N * log(N))
+
 from heapq import nlargest, nsmallest
 from functools import reduce
 
@@ -64,3 +82,5 @@ def solution(A):
     if smallest_elements[1] < 0:
         temp = smallest_elements[0]*smallest_elements[1] * largest_elements[0]
     return temp if temp >= max_prod else max_prod
+
+"""
