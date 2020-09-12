@@ -1,14 +1,16 @@
 /*
 Author: Fernando Zuher
 Place: Brazil
-Date: 05 July 2020
-About: codility.com -> Lesson 6, Sorting -> Triangle.ccccc
+Date: 11 September 2020
+About: codility.com -> Lesson 6, Sorting -> Triangle
 
 I solved this problem in the languages:
     C, C++, Java, Python and JavaScript. ;-)
 */
 
 /*
+Source: https://app.codility.com/programmers/lessons/6-sorting/triangle/
+
 An array A consisting of N integers is given. A triplet (P, Q, R) is
 triangular if 0 ≤ P < Q < R < N and:
 
@@ -46,16 +48,17 @@ each element of array A is an integer within the range
 
 Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 copying, publication or disclosure prohibited.
+
 */
 
 // 10 lines. O(n^3). 75%.
 int solution(int A[], int N)
 {
-	for (int p = 0, n_p = N-2; p < n_p; ++p)
-		for (int q = p + 1, n_q = N-1; q < n_q; ++q)
-			for (int r = q + 1, n_r = N; r < n_r; ++r)
+	for (int p = 0, n_p = N-2; p < n_p; p++)
+		for (int q = p + 1, n_q = N-1; q < n_q; q++)
+			for (int r = q + 1, n_r = N; r < n_r; r++)
 				if (((long)A[p] + A[q]) > A[r] && ((long)A[q] + A[r]) > A[p]
 					&& ((long)A[r] + A[p]) > A[q])
 					return 1;
-	return 0;	
+	return 0;
 }
