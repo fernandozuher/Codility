@@ -64,18 +64,56 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 # copying, publication or disclosure prohibited.
 # 
-# 14 lines, O(N*M). 62% =/
+# 22 lines, O(N * M) 75% =/
+from itertools import islice
+convert = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+
 def solution(S, P, Q):
-	S_temp = {'A': 1, 'C': 2, 'G': 3, 'T': 4}
-	expected_array = [None] * len(P)
+    
+    min1, max2, NUCLEOTIDES = min(P), max(Q), 4
+    matrix = [[] for i in range(NUCLEOTIDES)]
 
-	for i in range(len(P)):
-		initial, end, min = P[i], Q[i], 4
+    for i in range(min1, max2+1):
+        matrix[convert[S[i]]].append(i)
+    
+    A = []
+    for i in range(len(P)):
+        num = iter(range(NUCLEOTIDES))
+        for j in num:
+            for k in range(len(matrix[j])):
+                if matrix[j][k] >= P[i]:
+                    if matrix[j][k] <= Q[i]:
+                        A.append(j + 1)
+                        next(islice(num, NUCLEOTIDES, NUCLEOTIDES), None)
+                    break
+    return A
 
-		for j in range(initial, end+1):
-			if S_temp[S[j]] < min:
-				min = S_temp[S[j]]
 
-		expected_array[i] = min
 
-	return expected_array
+"""
+from itertools import islice
+convert = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
+
+def solution(S, P, Q):
+    
+    min1 = min(P)
+    max2 = max(Q)
+
+    N, NUCLEOTIDES = len(S), 4
+    matrix = [[] for i in range(NUCLEOTIDES)]
+
+    for i in range(min1, max2+1):
+        matrix[convert[S[i]]].append(i)
+    
+    A = []
+    for i in range(len(P)):
+        num = iter(range(NUCLEOTIDES))
+        for j in num:
+            for k in range(len(matrix[j])):
+                if matrix[j][k] >= P[i]:
+                    if matrix[j][k] <= Q[i]:
+                        A.append(j + 1)
+                        next(islice(num, NUCLEOTIDES, NUCLEOTIDES), None)
+                    break
+    return A
+"""

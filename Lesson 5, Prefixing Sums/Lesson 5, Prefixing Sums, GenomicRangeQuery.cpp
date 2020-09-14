@@ -39,16 +39,10 @@ impact factor is 4, so the answer is 4.
 The part between positions 0 and 6 (the whole string) contains all
 nucleotides, in particular nucleotide A whose impact factor is 1, so the
 answer is 1.
-Assume that the following declarations are given:
-
-struct Results {
-  int * A;
-  int M; // Length of the array
-};
 
 Write a function:
 
-struct Results solution(char *S, int P[], int Q[], int M);
+    vector<int> solution(string &S, vector<int> &P, vector<int> &Q);
 
 that, given a non-empty string S consisting of N characters and two non-empty
 arrays P and Q consisting of M integers, returns an array consisting of M
@@ -76,42 +70,35 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 38 lines, O(N + M)
-inline int convert(const int nucl)
+// 31 lines, O(N + M)
+#include <algorithm> // std::minmax_element
+
+inline int convert(char nucl)
 {
-    return nucl == 'A' ? 0 : (nucl == 'C' ? 1 : (nucl == 'G' ? 2 : 3));
+    return nucl == 'A' ? 0 : nucl == 'C' ? 1 : nucl == 'G' ? 2 : 3;
 }
 
-struct Results solution(char *S, int P[], int Q[], int M)
+vector<int> solution(string &S, vector<int> &P, vector<int> &Q)
 {
-    int min = P[0], max = Q[0];
-    // Get the biggest range from P and Q to be looked in S
-    for (int i = 1; i < M; i++) {
-        if (min > P[i])
-            min = P[i];
-        if (max < Q[i])
-            max = Q[i];
-    }
-
-    // Create matrix to be the size of max
-    int nucleotides = 4;
-    int matrix[nucleotides][max+1]; // Initialized with 0
-    int nucleotides_size[] = {[0 ... 3] = 0}; // Initialize with 0
+    const auto min {*std::min_element(begin(P), end(P))};
+    const auto max {*std::max_element(begin(Q), end(Q))};
+    const int nucleotides {4};
+    std::vector<int> matrix[4];
 
     // Convert only the range of array S that will be looked from min to max (inclusive).
-    for (int i = min, j; i < max+1; i++) {
-        j = convert(S[i]);
-        matrix[j][nucleotides_size[j]++] = i;
-    }
+    for (int i {min}; i < max+1; i++)
+        matrix[convert(S[i])].push_back(i);
     
-    int *A = (int*) malloc(sizeof(int) * M);
-    for (int i = 0; i < M; i++)
-        for (int j = 0; j < nucleotides; j++)
-            for (int k = 0; k < nucleotides_size[j]; k++)
+    std::vector<int> A;
+    const int M {static_cast<int>(P.size())};
+
+    for (int i {0}; i < M; i++)
+        for (int j {0}; j < nucleotides; j++)
+            for (int k {0}; k < static_cast<int>(matrix[j].size()); k++)
                 if (matrix[j][k] >= P[i]) {
                     if (matrix[j][k] <= Q[i])
-                        A[i] = j + 1, j = nucleotides;
+                        A.push_back(j + 1), j = nucleotides;
                     break;
                 }
-    return (struct Results) { A, M };
+    return A;
 }

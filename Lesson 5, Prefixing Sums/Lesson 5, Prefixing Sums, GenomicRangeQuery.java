@@ -39,16 +39,10 @@ impact factor is 4, so the answer is 4.
 The part between positions 0 and 6 (the whole string) contains all
 nucleotides, in particular nucleotide A whose impact factor is 1, so the
 answer is 1.
-Assume that the following declarations are given:
-
-struct Results {
-  int * A;
-  int M; // Length of the array
-};
 
 Write a function:
 
-struct Results solution(char *S, int P[], int Q[], int M);
+    class Solution { public int[] solution(String S, int[] P, int[] Q); }
 
 that, given a non-empty string S consisting of N characters and two non-empty
 arrays P and Q consisting of M integers, returns an array consisting of M
@@ -76,42 +70,52 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 38 lines, O(N + M)
-inline int convert(const int nucl)
-{
-    return nucl == 'A' ? 0 : (nucl == 'C' ? 1 : (nucl == 'G' ? 2 : 3));
-}
+// 48 lines, O(N + M)
+import java.util.Arrays;
 
-struct Results solution(char *S, int P[], int Q[], int M)
-{
-    int min = P[0], max = Q[0];
-    // Get the biggest range from P and Q to be looked in S
-    for (int i = 1; i < M; i++) {
-        if (min > P[i])
-            min = P[i];
-        if (max < Q[i])
-            max = Q[i];
+class Solution {
+
+    private int convert(char ch) {
+        switch(ch) {
+            case 'A':
+                return 0;
+            case 'C':
+                return 1;
+            case 'G':
+                return 2;
+            default:
+                return 3;
+        }
     }
 
-    // Create matrix to be the size of max
-    int nucleotides = 4;
-    int matrix[nucleotides][max+1]; // Initialized with 0
-    int nucleotides_size[] = {[0 ... 3] = 0}; // Initialize with 0
+    public int[] solution(String S, int[] P, int[] Q) {
 
-    // Convert only the range of array S that will be looked from min to max (inclusive).
-    for (int i = min, j; i < max+1; i++) {
-        j = convert(S[i]);
-        matrix[j][nucleotides_size[j]++] = i;
+        int min = Arrays.stream(P).min().getAsInt();
+        int max = Arrays.stream(Q).max().getAsInt();
+        
+        final int nucleotides = 4;
+        int[][] matrix = new int[nucleotides][max+1];
+        int[] nucleotides_size = new int[nucleotides]; // Default with 0, default
+
+        // Convert only the range of array S that will be looked from min to max (inclusive).
+        for (int i = min, j; i < max+1; i++) {
+            j = convert(S.charAt(i));
+            matrix[j][nucleotides_size[j]++] = i;
+        }
+        
+        final int M = P.length;
+        int[] A = new int[M];
+
+        for (int i = 0; i < M; i++)
+            for (int j = 0; j < nucleotides; j++)
+                for (int k = 0; k < nucleotides_size[j]; k++)
+                    if (matrix[j][k] >= P[i]) {
+                        if (matrix[j][k] <= Q[i]) {
+                            A[i] = j + 1;
+                            j = nucleotides;
+                        }
+                        break;
+                    }
+        return A;
     }
-    
-    int *A = (int*) malloc(sizeof(int) * M);
-    for (int i = 0; i < M; i++)
-        for (int j = 0; j < nucleotides; j++)
-            for (int k = 0; k < nucleotides_size[j]; k++)
-                if (matrix[j][k] >= P[i]) {
-                    if (matrix[j][k] <= Q[i])
-                        A[i] = j + 1, j = nucleotides;
-                    break;
-                }
-    return (struct Results) { A, M };
 }
