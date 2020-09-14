@@ -4,8 +4,8 @@ Place: Brazil
 Date: 13 September 2020
 About: codility.com -> Lesson 5, Prefixing Sums -> GenomicRangeQuery
 
-I solved this problem in the languages:
-    C, C++, Java, Python and JavaScript. ;-)
+I solved this problem in the languages: C (47 lines), C++ (40 lines),
+Java (48 lines), Python (22 lines) and JavaScript (33 lines). ;-)
 */
 
 /*
@@ -42,7 +42,7 @@ answer is 1.
 
 Write a function:
 
-    class Solution { public int[] solution(String S, int[] P, int[] Q); }
+    function solution(S, P, Q);
 
 that, given a non-empty string S consisting of N characters and two non-empty
 arrays P and Q consisting of M integers, returns an array consisting of M
@@ -70,52 +70,37 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 48 lines, O(N + M)
-import java.util.Arrays;
+// 33 lines, O(N + M)
+function solution(S, P, Q) {
 
-class Solution {
-
-    private int convert(char ch) {
-        switch(ch) {
+    const min = Math.min(...P), max = Math.max(...Q), nucleotides = 4
+    let matrix = [[], [], [], []]
+    
+    for (let i = min, j; i < max+1; i++) {
+        switch(S[i]) {
             case 'A':
-                return 0;
+                j = 0
+                break
             case 'C':
-                return 1;
+                j = 1
+                break
             case 'G':
-                return 2;
+                j = 2
+                break
             default:
-                return 3;
+                j = 3
         }
+        matrix[j].push(i)
     }
-
-    public int[] solution(String S, int[] P, int[] Q) {
-
-        int min = Arrays.stream(P).min().getAsInt();
-        int max = Arrays.stream(Q).max().getAsInt();
-        
-        final int nucleotides = 4;
-        int[][] matrix = new int[nucleotides][max+1];
-        int[] nucleotides_size = new int[nucleotides]; // Default with 0, default
-
-        // Convert only the range of array S that will be looked from min to max (inclusive).
-        for (int i = min, j; i < max+1; i++) {
-            j = convert(S.charAt(i));
-            matrix[j][nucleotides_size[j]++] = i;
-        }
-        
-        final int M = P.length;
-        int[] A = new int[M];
-
-        for (int i = 0; i < M; i++)
-            for (int j = 0; j < nucleotides; j++)
-                for (int k = 0; k < nucleotides_size[j]; k++)
-                    if (matrix[j][k] >= P[i]) {
-                        if (matrix[j][k] <= Q[i]) {
-                            A[i] = j + 1;
-                            j = nucleotides;
-                        }
-                        break;
-                    }
-        return A;
-    }
+    
+    let A = []
+    for (let i = 0; i < P.length; i++)
+        for (let j = 0; j < nucleotides; j++)
+            for (let k = 0; k < matrix[j].length; k++)
+                if (matrix[j][k] >= P[i]) {
+                    if (matrix[j][k] <= Q[i])
+                        A.push(j + 1), j = nucleotides
+                    break
+                }
+    return A
 }

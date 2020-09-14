@@ -4,8 +4,8 @@ Place: Brazil
 Date: 13 September 2020
 About: codility.com -> Lesson 5, Prefixing Sums -> GenomicRangeQuery
 
-I solved this problem in the languages:
-    C, C++, Java, Python and JavaScript. ;-)
+I solved this problem in the languages: C (47 lines), C++ (40 lines),
+Java (48 lines), Python (22 lines) and JavaScript (33 lines). ;-)
 */
 
 /*
@@ -75,8 +75,8 @@ import java.util.Arrays;
 
 class Solution {
 
-    private int convert(char ch) {
-        switch(ch) {
+    private int convert(final char nucl) {
+        switch(nucl) {
             case 'A':
                 return 0;
             case 'C':

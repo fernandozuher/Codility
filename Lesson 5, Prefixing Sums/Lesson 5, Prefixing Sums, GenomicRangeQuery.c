@@ -4,8 +4,8 @@ Place: Brazil
 Date: 13 September 2020
 About: codility.com -> Lesson 5, Prefixing Sums -> GenomicRangeQuery
 
-I solved this problem in the languages:
-    C, C++, Java, Python and JavaScript. ;-)
+I solved this problem in the languages: C (47 lines), C++ (40 lines),
+Java (48 lines), Python (22 lines) and JavaScript (33 lines). ;-)
 */
 
 /*
@@ -76,10 +76,19 @@ copying, publication or disclosure prohibited.
 
 */
 
-// 38 lines, O(N + M)
-inline int convert(const int nucl)
+// 47 lines, O(N + M)
+inline int convert(const char nucl)
 {
-    return nucl == 'A' ? 0 : (nucl == 'C' ? 1 : (nucl == 'G' ? 2 : 3));
+    switch(nucl) {
+        case 'A':
+            return 0;
+        case 'C':
+            return 1;
+        case 'G':
+            return 2;
+        default:
+            return 3;
+    }
 }
 
 struct Results solution(char *S, int P[], int Q[], int M)

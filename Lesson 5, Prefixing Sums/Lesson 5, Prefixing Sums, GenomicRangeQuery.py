@@ -1,13 +1,16 @@
+#
 # Author: Fernando Zuher
 # Place: Brazil
-# Date: 30 June 2020
+# Date: 13 September 2020
 # About: codility.com -> Lesson 5, Prefixing Sums -> GenomicRangeQuery
 # 
-# I solved this problem in the languages:
-#     C, C++, Java, Python and JavaScript. ;-)
+# I solved this problem in the languages: C (47 lines), C++ (40 lines),
+# Java (48 lines), Python (22 lines) and JavaScript (33 lines). ;-)
 #
 ############################################################################## 
-# 
+#
+# Source: https://app.codility.com/programmers/lessons/5-prefix_sums/genomic_range_query/
+#
 # A DNA sequence can be represented as a string consisting of the letters A, C,
 # G and T, which correspond to the types of successive nucleotides in the
 # sequence. Each nucleotide has an impact factor, which is an integer.
@@ -64,56 +67,26 @@
 # Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
 # copying, publication or disclosure prohibited.
 # 
-# 22 lines, O(N * M) 75% =/
+# 22 lines, O(N * M), 75% =/
 from itertools import islice
-convert = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
 
 def solution(S, P, Q):
     
-    min1, max2, NUCLEOTIDES = min(P), max(Q), 4
-    matrix = [[] for i in range(NUCLEOTIDES)]
+    min1, max2, nucleotides = min(P), max(Q), 4
+    matrix = [[] for i in range(nucleotides)]
+    convert = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
 
     for i in range(min1, max2+1):
         matrix[convert[S[i]]].append(i)
     
     A = []
     for i in range(len(P)):
-        num = iter(range(NUCLEOTIDES))
+        num = iter(range(nucleotides))
         for j in num:
             for k in range(len(matrix[j])):
                 if matrix[j][k] >= P[i]:
                     if matrix[j][k] <= Q[i]:
                         A.append(j + 1)
-                        next(islice(num, NUCLEOTIDES, NUCLEOTIDES), None)
+                        next(islice(num, nucleotides, nucleotides), None)
                     break
     return A
-
-
-
-"""
-from itertools import islice
-convert = {'A': 0, 'C': 1, 'G': 2, 'T': 3}
-
-def solution(S, P, Q):
-    
-    min1 = min(P)
-    max2 = max(Q)
-
-    N, NUCLEOTIDES = len(S), 4
-    matrix = [[] for i in range(NUCLEOTIDES)]
-
-    for i in range(min1, max2+1):
-        matrix[convert[S[i]]].append(i)
-    
-    A = []
-    for i in range(len(P)):
-        num = iter(range(NUCLEOTIDES))
-        for j in num:
-            for k in range(len(matrix[j])):
-                if matrix[j][k] >= P[i]:
-                    if matrix[j][k] <= Q[i]:
-                        A.append(j + 1)
-                        next(islice(num, NUCLEOTIDES, NUCLEOTIDES), None)
-                    break
-    return A
-"""
