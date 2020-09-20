@@ -1,27 +1,12 @@
-// O(n)
+#include <string.h> // strchr
 int solution(char *S)
 {
-    if (!S[0])
-        return 1;
-
-    char stack[100000];
-    int i = -1;
-    char temp[] = {'(', '{', '['};
-    
-    while (*S) {
+    int i = 0;
+    for (char stack[100000], temp[] = {'(', '{', '['}; *S; S++)
         if (strchr(temp, *S))
-            stack[++i] = *S;
-        else if (i >= 0) {
-            if (!(( *S == ')' && stack[i--] == '(' ) || \
-                ( *S == '}' && stack[i--] == '{' ) || \
-                ( *S == ']' && stack[i--] == '[' )))
-                return 0;
-        }
-        else
+            stack[i++] = *S;
+        else if (!(i >= 1 && (*S == stack[--i]+1 || *S == stack[i]+2)))
             return 0;
-        S++;
-    }
-    if (i >= 0)
-        return 0;
-    return 1;
+    return !i;
 }
+// 11 lines. O(n)
