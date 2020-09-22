@@ -2,7 +2,7 @@
 # Author: Fernando Zuher
 # Place: Brazil
 # Date: 11 September 2020
-# About: codility.com -> Lesson 6, Sorting -> Distinct.py
+# About: codility.com -> Lesson 6, Sorting -> Distinct
 # 
 # I solved this problem in the languages: C (17 lines), C++ (5 lines),
 # Java (7 lines), Python (2 lines) and JavaScript (3 lines). ;-)
