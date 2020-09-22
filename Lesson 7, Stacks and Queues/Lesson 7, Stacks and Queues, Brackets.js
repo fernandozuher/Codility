@@ -1,19 +1,16 @@
-#include <vector> // vector<T>
-#include <algorithm> // find()
-int solution(string &S)
-{
-    std::vector<char> stack;
-    std::string str {"{[("};
-    for (auto ch : S)
-        if (str.find(ch) != std::string::npos)
-            stack.push_back(ch);
-        else if (!stack.empty() && (ch == stack.back()+1 || ch == stack.back()+2))
-            stack.pop_back();
+function solution(S) {
+    const [stack, str, ascii] = [[], "{[(", a => a.charCodeAt(0)]
+    for (const ch of S)
+        if (str.includes(ch))
+            stack.push(ch)
+        else if (stack.length && (ascii(ch) === ascii(stack[stack.length-1])+1
+                 || ascii(ch) === ascii(stack[stack.length-1])+2))
+            stack.pop()
         else
-            return 0;
-    return stack.empty();
+            return 0
+    return stack.length ? 0 : 1
 }
-// 15 lines, O(n)
+// 12 lines, O(n)
 /*
 Author: Fernando Zuher
 Place: Sao Paulo, Brazil
@@ -35,7 +32,7 @@ For example, the string "{[()()]}" is properly nested but "([)()]" is not.
 
 Write a function:
 
-int solution(string &S);
+function solution(S);
 
 that, given a string S consisting of N characters, returns 1 if S is properly
 nested and 0 otherwise.
