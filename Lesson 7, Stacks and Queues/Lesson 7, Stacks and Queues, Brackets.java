@@ -19,7 +19,7 @@ class Solution {
 Author: Fernando Zuher
 Place: Sao Paulo, Brazil
 Date: 22 September 2020
-About: codility.com -> Lesson 6, Sorting -> Brackets
+About: codility.com -> Lesson 7, Stacks and Queues -> Brackets
 
 I solved this problem in the languages: C (11 lines), C++ (15 lines),
 Java (16 lines), Python (10 lines) and JavaScript (12 lines). ;-)
