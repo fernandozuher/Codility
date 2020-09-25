@@ -18,14 +18,21 @@ int solution(int H[], int N)
             stack[j] = H[i];
             if (j - 1 >= 0 && stack[j-1] == stack[j])
                 j--;
+            for (int i = 0; i < j; i++) {
+                if (stack[i] != 0 && stack[i] > stack[j]) {
+                    blocks++;
+                    stack[i] = 0;
+                }
+            }
         }
         else if (H[i] > stack[j])
             stack[++j] = H[i];
     }
-    qsort (stack, j+1, sizeof(int), compare);
-    int k = 1;
+    /*qsort (stack, j+1, sizeof(int), compare);
+    int k = 0;
     for (int i = 0; i < j; i++)
         if (stack[i] != stack[i+1])
             k++;
-    return k + blocks;
+    */
+    return blocks + 1;
 }
