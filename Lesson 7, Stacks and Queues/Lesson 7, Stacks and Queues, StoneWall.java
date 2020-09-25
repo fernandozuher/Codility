@@ -1,16 +1,20 @@
-int solution(int H[], int N)
-{
-    int size = 0, blocks = 1;
-    for (int i = 1, stack[100000] = {H[0]}; i < N; i++)
-        if (H[i] != stack[size]) {
-            for (; size >= 0 && stack[size] >= H[i]; size--)
-                if (stack[size] > H[i])
-                    blocks++;
-            stack[++size] = H[i];
-        }
-    return blocks + size;
+import java.util.*;
+class Solution {
+    public int solution(int[] H) {
+        int blocks = 0;
+        ArrayDeque<Integer> stack = new ArrayDeque<Integer>();
+        stack.add(H[0]);
+        for (int height : H)
+            if (height != stack.getLast()) {
+                for (; !stack.isEmpty() && stack.getLast() >= height; stack.removeLast())
+                    if (stack.getLast() > height)
+                        blocks++;
+                stack.addLast(height);
+            }
+        return blocks + stack.size();
+    }
 }
-// 12 lines, O(N)
+// 16 lines, O(N)
 /*
 Author: Fernando Zuher
 Place: Sao Paulo, Brazil
@@ -35,7 +39,7 @@ needed to build the wall.
 
 Write a function:
 
-int solution(int H[], int N);
+class Solution { public int solution(int[] H); }
 
 that, given an array H of N positive integers specifying the height of the
 wall, returns the minimum number of blocks needed to build it.

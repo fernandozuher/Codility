@@ -1,16 +1,18 @@
-int solution(int H[], int N)
-{
-    int size = 0, blocks = 1;
-    for (int i = 1, stack[100000] = {H[0]}; i < N; i++)
-        if (H[i] != stack[size]) {
-            for (; size >= 0 && stack[size] >= H[i]; size--)
-                if (stack[size] > H[i])
-                    blocks++;
-            stack[++size] = H[i];
+function solution(H) {
+    let blocks = 0, stack = []
+    stack.push(H[0])
+    for (let height of H) {
+        let n = stack.length
+        if (height != stack[n-1]) {
+            for (; n && stack[n-1] >= height; stack.pop(), n--)
+                if (stack[n-1] > height)
+                    blocks++
+            stack.push(height)
         }
-    return blocks + size;
+    }
+    return blocks + stack.length;
 }
-// 12 lines, O(N)
+// 14 lines, O(N)
 /*
 Author: Fernando Zuher
 Place: Sao Paulo, Brazil
@@ -35,7 +37,7 @@ needed to build the wall.
 
 Write a function:
 
-int solution(int H[], int N);
+def solution(H);
 
 that, given an array H of N positive integers specifying the height of the
 wall, returns the minimum number of blocks needed to build it.
