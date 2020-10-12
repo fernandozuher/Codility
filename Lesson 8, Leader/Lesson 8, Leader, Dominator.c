@@ -1,11 +1,35 @@
-function solution(A) {
-    let [counter, max, dominator] = [{}, 0, 0]
-    for (let [index, value] of A.entries())
-        if ((counter[value] = !(value in counter) ? 1 : counter[value]+1) > max)
-            [max, dominator] = [counter[value], index]
-    return max > (A.length / 2) ? dominator : -1
+#include <string.h> // memcpy()
+int compare (const void * a, const void * b)
+{
+   return ( *(int*)a - *(int*)b );
 }
-// 7 lines, O(N*log(N)) or O(N)
+
+int solution(int A[], int N)
+{
+    int sorted_A[N];
+    memcpy(sorted_A, A, N * sizeof(int));
+    qsort(sorted_A, N, sizeof(int), compare);
+
+    int max = 0, dominator = sorted_A[0], previous = 0, count = 0;
+
+    for (int i = 0; i < N; i++)
+        if (sorted_A[previous] == sorted_A[i])
+            count++;
+        else {
+            if (count > max)
+                max = count, dominator = sorted_A[previous];
+            count = 1, previous = i;
+        }
+    if (count > max)
+        max = count, dominator = sorted_A[previous];
+
+    if (max > N / 2)
+        for (int i = 0; i < N; i++)
+            if (A[i] == dominator)
+                return i;
+    return -1;
+}
+// 31 lines, O(N*log(N)) or O(N)
 /*
 Author: Fernando Zuher
 Place: Sao Paulo, Brazil
@@ -30,7 +54,7 @@ in those with indices 0, 2, 4, 6 and 7) and 5 is more than a half of 8.
 
 Write a function
 
-function solution(A);
+int solution(int A[], int N);
 
 that, given an array A consisting of N integers, returns index of any element
 of array A in which the dominator of A occurs. The function should return −1

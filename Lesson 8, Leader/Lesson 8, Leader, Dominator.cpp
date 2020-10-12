@@ -1,29 +1,58 @@
-#include <algorithm> // sort
+#include <unordered_map>
 int solution(vector<int> &A)
 {
-    if (!A.size())
-        return -1;
-    
-    std::vector<int> backup {A};
-    std::sort(A.begin(), A.end());
-    int mode {A.at(0)}, count_mode {1}, current_count {0}, previous {A.at(0)};
+    std::unordered_map<int, int> counter;
+    int max {}, dominator {};
 
-    for (auto it = A.begin(); it != A.end(); it++)
-        if (previous == *it)
-            current_count++;
-        else {
-            if (current_count > count_mode) {
-                count_mode = current_count;
-                mode = *(it - 1);
-            }
-            current_count = 1;
-            previous = *it;
-        }
-
-    if (current_count > count_mode) {
-        count_mode = current_count;
-        mode = A.back();
-    }
-    auto index {std::find(backup.begin(), backup.end(), mode) - backup.begin()};
-    return count_mode > (static_cast<int>(backup.size()) / 2) ? index : -1;
+    for (auto& value : A)
+        if (++counter[value] > max)
+            max = counter[value], dominator = &value - &A[0];
+    return max > (static_cast<int>(A.size()) / 2) ? dominator : -1;
 }
+// 11 lines, O(N*log(N)) or O(N)
+/*
+Author: Fernando Zuher
+Place: Sao Paulo, Brazil
+Date: 12 October 2020
+About: app.codility.com/programmers -> Lesson 8, Leader -> Dominator
+
+I solved this problem in the languages: C (31 lines), C++ (11 lines),
+Java (19 lines), Python (5 lines) and JavaScript (7 lines). ;-)
+
+Source: https://app.codility.com/programmers/lessons/8-leader/dominator/
+
+An array A consisting of N integers is given. The dominator of array A is the
+value that occurs in more than half of the elements of A.
+
+For example, consider array A such that
+
+ A[0] = 3    A[1] = 4    A[2] =  3
+ A[3] = 2    A[4] = 3    A[5] = -1
+ A[6] = 3    A[7] = 3
+The dominator of A is 3 because it occurs in 5 out of 8 elements of A (namely
+in those with indices 0, 2, 4, 6 and 7) and 5 is more than a half of 8.
+
+Write a function
+
+int solution(vector<int> &A);
+
+that, given an array A consisting of N integers, returns index of any element
+of array A in which the dominator of A occurs. The function should return −1
+if array A does not have a dominator.
+
+For example, given array A such that
+
+ A[0] = 3    A[1] = 4    A[2] =  3
+ A[3] = 2    A[4] = 3    A[5] = -1
+ A[6] = 3    A[7] = 3
+the function may return 0, 2, 4, 6 or 7, as explained above.
+
+Write an efficient algorithm for the following assumptions:
+
+N is an integer within the range [0..100,000];
+each element of array A is an integer within the range
+[−2,147,483,648..2,147,483,647].
+
+Copyright 2009–2020 by Codility Limited. All Rights Reserved. Unauthorized
+copying, publication or disclosure prohibited.
+*/
