@@ -1,8 +1,8 @@
 #include <cmath>
 int solution(int N)
 {
-    int factors {0}, limit {static_cast<int>(floor(sqrt(N)))};
-    bool temp {pow(limit, 2) == N};
+    int factors {0}, limit {static_cast<int>(std::floor(sqrt(N)))};
+    bool temp {std::pow(limit, 2) == N};
     limit -= temp;
     for (int i {1}; i <= limit; factors += !(N % i++) ? 2 : 0);
     return temp ? ++factors : factors;
