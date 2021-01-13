@@ -1,3 +1,31 @@
+#include <math.h>
+
+int solution(int A[], int N)
+{
+    int temp[N/2];
+
+    int n = 0;
+    for (int i = 1; i < N - 1; i++)
+        if (A[i-1] < A[i] && A[i] > A[i+1])
+            temp[n++] = i++;
+
+    //printf("peaks: %d", n);
+
+    //printf("\nabs: ");
+    int result = 0;
+    for (int i = 0, temp2; i < n-1; result += temp2 > n ? n : temp2, i++)
+        temp2 = temp[i+1] - temp[i];
+
+    //printf("\nresult: %d %d", result, n);
+
+    if (n == 1)
+        return 1;
+    return ceil(sqrt(result));
+}
+
+
+
+
 // 60%
 int solution(int A[], int N)
 {
@@ -9,11 +37,7 @@ int solution(int A[], int N)
     int n = 0;
     //printf("\npeaks: ");
     for (int i = 1; i < N - 1; i++)
-        if (A[i-1] < A[i] && A[i] > A[i+1]) {
-            temp[n++] = i;
-            //printf("%d, ", i);
-            i++;
-        }
+        (A[i-1] < A[i] && A[i] > A[i+1] && (temp[n++] = i++));
 
     int flags = 0, max_flags = 0;
     //printf("\nflags, peaks %d: ", n);
